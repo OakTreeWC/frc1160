@@ -9,7 +9,7 @@ export default function NavBar() {
         className="flex items-center justify-center align-middle hover:drop-shadow-2xl object-contain"
         href="/"
         >
-            <TiLogo  className="h-full"/>
+            <TiLogo />
         </Link>
         <Link className = {`text-xl flex items-center justify-center align-middle p-4 bg-clear text-black`} href="/aboutus"><p className="hover:border-blue-500 border-transparent border-4 p-1">About Us</p></Link>
         <Link className = {`text-xl flex items-center justify-center align-middle p-4 bg-clear text-black`} href="/contactus"><p className="hover:border-blue-500 border-transparent border-4 p-1">Contact Us</p></Link>
