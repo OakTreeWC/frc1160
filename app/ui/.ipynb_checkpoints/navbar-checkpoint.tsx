@@ -8,6 +8,7 @@ export default function NavBar() {
         <Link
         className="flex items-center justify-center align-middle hover:drop-shadow-2xl object-contain"
         href="/"
+        style={{opacity:"100%"}}
         >
             <TiLogo />
         </Link>
