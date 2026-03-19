@@ -11,7 +11,7 @@ export default function NavBar() {
         >
             <TiLogo />
         </Link>
-        <span className = {`flex flex-row space-x-0 justify-left bg-white p-0 h-25`} style={{opacity:"70%"}} >
+        <span className = {`flex flex-row space-x-0 justify-left bg-white p-0 h-25 `} style={{width:"100%",opacity:"70%"}} >
             <Link className = {`text-xl flex items-center justify-center align-middle p-4 bg-clear text-black`} href="/aboutus"><p className="hover:border-blue-500 border-transparent border-4 p-1">About Us</p></Link>
             <Link className = {`text-xl flex items-center justify-center align-middle p-4 bg-clear text-black`} href="/contactus"><p className="hover:border-blue-500 border-transparent border-4 p-1">Contact Us</p></Link>
         </span>
