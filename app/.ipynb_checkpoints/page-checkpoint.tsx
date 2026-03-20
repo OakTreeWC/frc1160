@@ -7,7 +7,7 @@ export default function Page() {
     <main>
         <NavBar />
         <div>
-            <Image src="/homepage.png" height={"1330"} width={"2000"} alt="background photo" />
+            <Image src="/homepage.png" height={"1330"} width={"2000"} alt="background photo" className="w-full" />
         </div>
     </main>
   );
