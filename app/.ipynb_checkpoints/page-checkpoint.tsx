@@ -12,7 +12,7 @@ export default function Page() {
         
         
         <div className="h-screen w-screen absolute z-10 font-light" style={{margin:"15% 0 25% 0"}}>
-            <h1 className="place-self-center italic m-10 py-10 text-6xl md:py-none md:text-9xl">
+            <h1 className="place-self-center italic m-10 py-10 text-6xl text-center md:mx-130 md:py-none md:text-9xl">
                 Feelings are important, but
                 it's the physics that matters.
             </h1>

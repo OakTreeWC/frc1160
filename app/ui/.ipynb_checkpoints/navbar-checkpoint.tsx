@@ -6,13 +6,18 @@ export default function NavBar() {
   return (
     <main className = {`flex flex-row space-x-0 justify-left bg-white p-0 h-25 absolute inset-0 z-10 md:bg-transparent opacity-70 md:opacity-100`} style={{width:"100%"}}>
         <Link
-        className="flex items-center justify-center align-middle object-contain"
+        className="flex items-center h-full flex-shrink-0 flex-grow-0"
         href="/"
         >
             <TiLogo />
         </Link>
+
         <span 
-            className = {`flex flex-row space-x-0 justify-left bg-white p-0 h-25 `} 
+            className = {`flex flex-row space-x-0 justify-left bg-white p-0 h-25 md:hidden w-100 md:w-0 `} 
+            />
+        
+        <span 
+            className = {`flex flex-row space-x-0 justify-left bg-white p-0 h-25 hidden md:flex`} 
             style={{width:"100%",opacity:"70%"}} 
             >
             <Link 
