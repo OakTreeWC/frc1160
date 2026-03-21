@@ -4,16 +4,33 @@ import TiLogo from '@/app/ui/TiLogo';
 
 export default function NavBar() {
   return (
-    <main className = {`flex flex-row space-x-0 justify-left bg-transparent p-0 h-25 absolute inset-0 z-10`} style={{width:"100%"}}>
+    <main className = {`flex flex-row space-x-0 justify-left bg-white p-0 h-25 absolute inset-0 z-10 md:bg-transparent opacity-70 md:opacity-100`} style={{width:"100%"}}>
         <Link
-        className="flex items-center justify-center align-middle hover:drop-shadow-2xl object-contain"
+        className="flex items-center justify-center align-middle object-contain"
         href="/"
         >
             <TiLogo />
         </Link>
-        <span className = {`flex flex-row space-x-0 justify-left bg-white p-0 h-25 `} style={{width:"100%",opacity:"70%"}} >
-            <Link className = {`text-xl flex items-center justify-center align-middle p-4 bg-clear text-black`} href="/aboutus"><p className="hover:border-blue-500 border-transparent border-4 p-1">About Us</p></Link>
-            <Link className = {`text-xl flex items-center justify-center align-middle p-4 bg-clear text-black`} href="/contactus"><p className="hover:border-blue-500 border-transparent border-4 p-1">Contact Us</p></Link>
+        <span 
+            className = {`flex flex-row space-x-0 justify-left bg-white p-0 h-25 `} 
+            style={{width:"100%",opacity:"70%"}} 
+            >
+            <Link 
+                className = {`text-xl flex items-center justify-center align-middle p-4 bg-clear text-black`} 
+                href="/aboutus"
+                >
+                <p className="hover:border-blue-500 border-transparent border-4 p-1">
+                    About Us
+                </p>
+            </Link>
+            <Link 
+                className = {`text-xl flex items-center justify-center align-middle p-4 bg-clear text-black`} 
+                href="/contactus"
+                >
+                <p className="hover:border-blue-500 border-transparent border-4 p-1">
+                    Contact Us
+                </p>
+            </Link>
         </span>
     </main>
   );
