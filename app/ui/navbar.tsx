@@ -4,7 +4,7 @@ import TiLogo from '@/app/ui/TiLogo';
 
 export default function NavBar() {
   return (
-    <main className = {`flex flex-row space-x-0 justify-left bg-transparent p-0 h-25 fixed`} style={{width:"100%"}}>
+    <main className = {`flex flex-row space-x-0 justify-left bg-transparent p-0 h-25 absolute inset-0 z-10`} style={{width:"100%"}}>
         <Link
         className="flex items-center justify-center align-middle hover:drop-shadow-2xl object-contain"
         href="/"
