@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from 'next/link';
 
 export default function Page() {
+  const sponsors = ["The Chen Family", "The Chuang Family", "The Luk Family", "The Potts Family", "The idfk Family"]
   return (
-    <main>
+    <main className="text-center md:text-left">
         
         <div className="z-0 w-full h-screen hidden md:block" >
             <Image src="/homepage.jpg" height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-cover w-full h-full overflow-hidden bg-center fixed filter brightness-50 hidden md:block" />
@@ -77,15 +78,23 @@ export default function Page() {
                                 <Image src="/sponsors/boing.svg" width={300} height={300} alt="boing boing" className="object-contain" />
                                 <Image src="/sponsors/JPL.svg" width={300} height={300} alt="jet propulsion laboratory" className="object-contain" />
                                 <Image src="/sponsors/nasa.svg" width={300} height={300} alt="nasa" className="object-contain" />
+                                <Image src="/sponsors/rgsport.svg" width={300} height={300} alt="rgsport" className="object-contain" />
+                                <Image src="/sponsors/disney-employee-matching-gifts.jpg" width={150} height={150} alt="disney employee matching gifts" className="object-contain" />
                             </div>
                             <div className="flex flex-col space-y-8 md:hidden">
                                 <Image src="/sponsors/boing.svg" width={300} height={300} alt="boing boing" className="object-contain" />
                                 <Image src="/sponsors/JPL.svg" width={300} height={300} alt="jet propulsion laboratory" className="object-contain" />
                                 <Image src="/sponsors/nasa.svg" width={300} height={300} alt="nasa" className="object-contain" />
+                                <Image src="/sponsors/rgsport.svg" width={300} height={300} alt="rgsport" className="object-contain" />
+                                <Image src="/sponsors/disney-employee-matching-gifts.jpg" width={150} height={150} alt="disney employee matching gifts" className="object-contain" />
                             </div>
                         </div>
                         <div className="text-2xl font-normal flex flex-col space-y-5 pt-10 text-center">
-                            <span>The Gemini Family</span>
+                            {
+                                sponsors.map((sponsor) => {
+                                    return (<span key={sponsor}>{sponsor}</span>);
+                                })
+                            }
                         </div>
                         <div className="flex justify-center mt-10 opacity-100">
                             <Link href="/sponsors" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-3xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Become a Sponsor</Link>
