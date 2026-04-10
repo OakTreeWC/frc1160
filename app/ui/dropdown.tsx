@@ -3,7 +3,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
 
-export default function Dropdown({links, pathname}) {
+export default function Dropdown(
+  { links, pathname }: { links: any[]; pathname: string }
+) {
     const [isOpen, setIsOpen] = useState(false);
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -29,10 +31,9 @@ export default function Dropdown({links, pathname}) {
                         <div className="py-1">
                             {
                                 links.map((link) => {
-                                        link.key = link.name;
                                         return (
                                             <Link
-                                                key={link.key}
+                                                key={link.name}
                                                 href={link.href}
                                                 className={clsx("block px-4 py-4 text-xl text-black opacity-100", {'bg-gray-200':pathname===link.href})}
             onClick={toggleDropdown}                                  >

@@ -16,7 +16,7 @@ export default function Page() {
                         </span>
                         <div className="relative w-full h-0 overflow-hidden pt-[77.284050%] mt-[1.6em] mb-[0.9em] bg-white">
                           <iframe loading="eager" className="absolute top-0 left-0 w-full h-full border-none bg-white m-0"
-                            src="https://www.canva.com/design/DAGgt8cX3Js/C4Htnz0lk4dnWK0-i8YSGQ/view?embed" allowFullScreen="allowfullscreen" allow="fullscreen">
+                            src="https://www.canva.com/design/DAGgt8cX3Js/C4Htnz0lk4dnWK0-i8YSGQ/view?embed" allowFullScreen={true} allow="fullscreen">
                           </iframe>
                         </div>
                         

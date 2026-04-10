@@ -36,10 +36,9 @@ export default function NavBar() {
             >
             {
                 links.map((link)=>{
-                    link.key = link.name
                     return (
                         <Link 
-                            key = {link.key}
+                            key = {link.name}
                             className = {`text-xl flex items-center justify-center align-middle p-4 bg-clear text-black`} 
                             href={link.href}
                         >

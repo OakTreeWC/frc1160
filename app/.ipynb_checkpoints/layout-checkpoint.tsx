@@ -3,6 +3,7 @@ import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import NavBar from '@/app/ui/navbar';
 import Link from 'next/link';
+import type { Viewport } from 'next'
 
 const sourceSans3 = Source_Sans_3({
   subsets: ["latin"],
