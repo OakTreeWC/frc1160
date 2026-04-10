@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from 'next/link';
+import { getSponsors } from '@/app/lib/data';
 
-export default function Page() {
-  const sponsors = ["The Chen Family", "The Chuang Family", "The Luk Family", "The Potts Family", "The idfk Family"]
+export default async function Page() {
+  let sponsors = await getSponsors();
   return (
     <main className="text-center md:text-left">
         
@@ -92,7 +93,7 @@ export default function Page() {
                         <div className="text-2xl font-normal flex flex-col space-y-5 pt-10 text-center">
                             {
                                 sponsors.map((sponsor) => {
-                                    return (<span key={sponsor}>{sponsor}</span>);
+                                    return (<span key={sponsor.name}>{sponsor.name}</span>);
                                 })
                             }
                         </div>

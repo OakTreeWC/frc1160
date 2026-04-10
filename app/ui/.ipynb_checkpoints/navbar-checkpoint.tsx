@@ -16,6 +16,7 @@ export default function NavBar() {
       {"name":"Robots","href":"/robots"},
       {"name":"Branding","href":"/brand"},
       {"name":"Donate","href":"/sponsors"},
+      {"name":"Login","href":"/login"},
   ]
   return (
     <main className = {`flex flex-row space-x-0 justify-left items-center bg-white p-0 h-25 absolute inset-0 z-10 md:bg-transparent opacity-100`} style={{width:"100%"}}>
