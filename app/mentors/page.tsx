@@ -38,7 +38,7 @@ export default function Page() {
                             Mr. Robert French – The Boeing Company
                         </span>
                         <span className="text-xl font-light">
-                            Mr. Robert French works with composites at Boeing. His generosity, skills, and humor make him an essential part of the team and his invaluable contributions have helped the team improve exponentially to what it is today. As a thank you to Mr. French, as well as The Boeing Company, every year, we bring our robot to Boeing’s Family Day, teaching the kids more about engineering and the ideals of FIRST Robotics.
+                            Mr. Robert French works with composites at Boeing. His generosity, skills, and humor make him an essential part of the team and his invaluable contributions have helped the team improve exponentially to what it is today. As a thank you to Mr. French, as well as The Boeing Company, every year, we bring our robot to Boeing’s Family Day, teaching the kids more about engineering and the ideals of FIRST Robotics. (Do they still do this?)
                         </span>
                     </div>
                 </div>
@@ -64,8 +64,11 @@ export default function Page() {
                             Mr. Shawn Thai - is he also smusd?
                         </span>
                         <span className="text-xl font-light">
-                            biz gotta shawn a fancy summary. 
+                            biz gotta make shawn a fancy summary. 
                         </span>
+                    </div>
+                    <div className="flex flex-col md:basis-1/4 items-center justify-center space-y-5">
+                        <Image src="/mentors/shawnthai.jpg" width={4526} height={3017} loading="eager" alt="Mr. Scott Barton"></Image>
                     </div>
                 </div>
             </div>

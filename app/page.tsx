@@ -55,7 +55,7 @@ export default async function Page() {
             <div className="py-20 px-10 md:px-45 w-full">
                 <div className="flex flex-col w-full md:w-auto md:flex-row flex-wrap">
                     <span className="md:basis-1/2 items-center">
-                        <Image src="/yippe.jpg" width={1000} height={665} alt="yippe" />
+                        <Image src="/yippee.jpg" width={1000} height={665} alt="yippe" />
                     </span>
                     <div className="md:basis-1/2 md:pl-7 pt-4 md:pt-0 text-xl font-light">
                         Titanium Robotics is an FRC team with roughly 50 members, mostly from San Marino High School in San Marino, CA, although some members are from surrounding schools and areas such as South Pasadena and Arcadia.

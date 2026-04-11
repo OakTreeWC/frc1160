@@ -7,7 +7,7 @@ export default function Page() {
         <div id="cards" className="pt-30 relative text-black w-full flex flex-col opacity-85 bg-white">
             <div className="py-19 px-10 md:px-45 w-full">
                 <div className="flex flex-row flex-wrap">
-                    <div className="flex flex-col items-center space-y-5">
+                    <div className="flex flex-col items-center space-y-7">
                         <span className="text-6xl font-light flex flex-col space-y-1">
                             Donate
                         </span>
