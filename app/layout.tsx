@@ -3,8 +3,8 @@ import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import NavBar from '@/app/ui/navbar';
 import Link from 'next/link';
-import type { Viewport } from 'next'
-import { Analytics } from "@vercel/analytics/next"
+import type { Viewport } from 'next';
+import { Analytics } from "@vercel/analytics/next";
 
 const sourceSans3 = Source_Sans_3({
   subsets: ["latin"],
@@ -33,6 +33,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <Analytics />
       <body
         className={`${sourceSans3.className} antialiased`}
       >
