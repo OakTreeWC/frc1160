@@ -2,10 +2,18 @@
 import postgres from 'postgres';
  
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+// caching
+const NodeCache = require("node-cache");
+const cache = new NodeCache({ stdTTL: 60, checkperiod: 120 });
 
 export async function getSponsors() {
   try {
+    const sponsors: any[] = cache.get("sponsors");
+    if (sponsors) {
+        return sponsors; // Return cached value if available
+    }
     const data = await sql`SELECT * FROM sponsors`;
+    cache.set("sponsors", data);
     return data;
   } catch (error) {
     console.error('Database Error:', error);
