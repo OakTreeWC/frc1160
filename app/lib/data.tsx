@@ -91,10 +91,10 @@ export async function removeUser(user: any) {
 export async function getUser(email: string) {
   try {
     // If using a tagged-template SQL helper that accepts parameters inline:
-    const result = await sql`SELECT * FROM users WHERE email = ${email} LIMIT 1;`;
+    const result: any[] = await sql`SELECT * FROM users WHERE email = ${email} LIMIT 1;`;
 
     // If result is a rows array (common), grab first row; otherwise adapt to your client
-    const user = Array.isArray(result) ? result[0] ?? null : (result.rows?.[0] ?? null);
+    const user = result[0];
 
     return user;
   } catch (error) {
