@@ -1,6 +1,7 @@
 'use server';
 import postgres from 'postgres';
- 
+import { revalidatePath } from 'next/cache'; 
+
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 // caching
 const NodeCache = require("node-cache");
@@ -8,7 +9,9 @@ const cache = new NodeCache({ stdTTL: 60, checkperiod: 120 });
 
 export async function clearCache() {
     console.log(await cache.flushAll());
+    revalidatePath("/");
     console.log("cache cleared");
+    
 }
 
 export async function getSponsors() {
