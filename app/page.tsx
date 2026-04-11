@@ -82,7 +82,7 @@ export default async function Page() {
                                 <Image src="/sponsors/rgsport.svg" width={300} height={150} alt="rgsport" className="object-contain" />
                                 <Image src="/sponsors/disney-employee-matching-gifts.jpg" width={150} height={150} alt="disney employee matching gifts" className="object-contain" />
                             </div>
-                            <div className="flex flex-col space-y-8 md:hidden opacity-100">
+                            <div className="flex flex-col space-y-8 md:hidden opacity-100 items-center">
                                 <Image src="/sponsors/boing.svg" width={300} height={68} alt="boing boing" className="object-contain" />
                                 <Image src="/sponsors/JPL.svg" width={300} height={88} alt="jet propulsion laboratory" className="object-contain" />
                                 <Image src="/sponsors/nasa.svg" width={181} height={150} alt="nasa" className="object-contain" />
