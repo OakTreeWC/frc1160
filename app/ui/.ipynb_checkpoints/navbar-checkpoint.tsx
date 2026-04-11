@@ -19,9 +19,9 @@ export default function NavBar() {
       {"name":"Login","href":"/login"},
   ]
   return (
-    <main className = {`flex flex-row space-x-0 justify-left items-center bg-white p-0 h-25 absolute inset-0 z-10 md:bg-transparent opacity-100`} style={{width:"100%"}}>
+    <main className = {`flex flex-row space-x-0 justify-left items-center bg-white p-0 h-25 absolute inset-0 z-10 md:bg-transparent opacity-90`} style={{width:"100%"}}>
         <Link
-        className="flex items-center h-full flex-shrink-0 flex-grow-0"
+        className="flex items-center h-full flex-shrink-0 flex-grow-0 bg-white"
         href="/"
         >
             <TiLogo />
@@ -32,8 +32,7 @@ export default function NavBar() {
             />
         
         <span 
-            className = {`flex flex-row space-x-0 justify-left bg-white p-0 h-25 hidden md:flex`} 
-            style={{width:"100%",opacity:"70%"}} 
+            className = {`flex flex-row space-x-0 justify-left bg-white p-0 h-25 hidden md:flex w-full`}  
             >
             {
                 links.map((link)=>{
@@ -43,7 +42,7 @@ export default function NavBar() {
                             className = {`text-xl flex items-center justify-center align-middle p-4 bg-clear text-black`} 
                             href={link.href}
                         >
-                            <p className={clsx("hover:border-blue-500 border-4 p-1",{'border-blue-500' : pathname === link.href,'border-transparent':pathname !== link.href},)}>
+                            <p className={clsx("hover:border-blue-500 border-4 px-2 py-1.5",{'border-blue-500' : pathname === link.href,'border-transparent':pathname !== link.href},)}>
                                 {link.name}
                             </p>
                         </Link>

@@ -5,6 +5,9 @@ import NavBar from '@/app/ui/navbar';
 import Link from 'next/link';
 import type { Viewport } from 'next'
 
+import { SessionProvider } from "next-auth/react";
+import { Toaster } from "react-hot-toast";
+
 const sourceSans3 = Source_Sans_3({
   subsets: ["latin"],
 });
@@ -29,6 +32,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  // const session = await auth();
   return (
     <html lang="en">
       <body
