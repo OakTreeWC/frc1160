@@ -65,6 +65,9 @@ importers:
       tls:
         specifier: ^0.0.1
         version: 0.0.1
+      vercel-analytics:
+        specifier: link:@/vercel-analytics
+        version: link:@/vercel-analytics
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4
