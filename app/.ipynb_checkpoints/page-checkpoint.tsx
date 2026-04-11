@@ -73,20 +73,20 @@ export default async function Page() {
             <div className="py-20 px-10 md:px-45 w-full">
                 <div className="flex flex-col">
                     <span className="items-center text-5xl font-light pb-6 text-center">Titanium Sponsors</span>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col items-center">
                         <div className="items-center font-light items-stretch">
-                            <div className="hidden md:flex flex-row flex-wrap p-8 space-x-8 space-y-8 justify-center">
-                                <Image src="/sponsors/boing.svg" width={300} height={300} alt="boing boing" className="object-contain" />
-                                <Image src="/sponsors/JPL.svg" width={300} height={300} alt="jet propulsion laboratory" className="object-contain" />
-                                <Image src="/sponsors/nasa.svg" width={300} height={300} alt="nasa" className="object-contain" />
-                                <Image src="/sponsors/rgsport.svg" width={300} height={300} alt="rgsport" className="object-contain" />
+                            <div className="hidden md:flex flex-row flex-wrap p-8 space-x-8 space-y-8 justify-center opacity-100">
+                                <Image src="/sponsors/boing.svg" width={300} height={68} alt="boing boing" className="object-contain" />
+                                <Image src="/sponsors/JPL.svg" width={300} height={88} alt="jet propulsion laboratory" className="object-contain" />
+                                <Image src="/sponsors/nasa.svg" width={181} height={150} alt="nasa" className="object-contain" />
+                                <Image src="/sponsors/rgsport.svg" width={300} height={150} alt="rgsport" className="object-contain" />
                                 <Image src="/sponsors/disney-employee-matching-gifts.jpg" width={150} height={150} alt="disney employee matching gifts" className="object-contain" />
                             </div>
-                            <div className="flex flex-col space-y-8 md:hidden">
-                                <Image src="/sponsors/boing.svg" width={300} height={300} alt="boing boing" className="object-contain" />
-                                <Image src="/sponsors/JPL.svg" width={300} height={300} alt="jet propulsion laboratory" className="object-contain" />
-                                <Image src="/sponsors/nasa.svg" width={300} height={300} alt="nasa" className="object-contain" />
-                                <Image src="/sponsors/rgsport.svg" width={300} height={300} alt="rgsport" className="object-contain" />
+                            <div className="flex flex-col space-y-8 md:hidden opacity-100">
+                                <Image src="/sponsors/boing.svg" width={300} height={68} alt="boing boing" className="object-contain" />
+                                <Image src="/sponsors/JPL.svg" width={300} height={88} alt="jet propulsion laboratory" className="object-contain" />
+                                <Image src="/sponsors/nasa.svg" width={181} height={150} alt="nasa" className="object-contain" />
+                                <Image src="/sponsors/rgsport.svg" width={300} height={150} alt="rgsport" className="object-contain" />
                                 <Image src="/sponsors/disney-employee-matching-gifts.jpg" width={150} height={150} alt="disney employee matching gifts" className="object-contain" />
                             </div>
                         </div>
@@ -98,7 +98,7 @@ export default async function Page() {
                             }
                         </div>
                         <div className="flex justify-center mt-10 opacity-100">
-                            <Link href="/sponsors" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-3xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Become a Sponsor</Link>
+                            <Link href="/donate" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-3xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Become a Sponsor</Link>
                         </div>
                         
                     </div>

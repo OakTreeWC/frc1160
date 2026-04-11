@@ -15,7 +15,7 @@ export default function NavBar() {
       {"name":"Mentors","href":"/mentors"},
       {"name":"Robots","href":"/robots"},
       {"name":"Branding","href":"/brand"},
-      {"name":"Donate","href":"/sponsors"},
+      {"name":"Donate","href":"/donate"},
       {"name":"Login","href":"https://admin.wchen.dev"},
   ]
   return (
