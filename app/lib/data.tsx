@@ -6,6 +6,11 @@ const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 const NodeCache = require("node-cache");
 const cache = new NodeCache({ stdTTL: 60, checkperiod: 120 });
 
+export async function clearCache() {
+    console.log(await cache.flushAll());
+    console.log("cache cleared");
+}
+
 export async function getSponsors() {
   try {
     const sponsors: any[] = cache.get("sponsors");
@@ -80,5 +85,20 @@ export async function removeUser(user: any) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to delete user.');
+  }
+}
+
+export async function getUser(email: string) {
+  try {
+    // If using a tagged-template SQL helper that accepts parameters inline:
+    const result = await sql`SELECT * FROM users WHERE email = ${email} LIMIT 1;`;
+
+    // If result is a rows array (common), grab first row; otherwise adapt to your client
+    const user = Array.isArray(result) ? result[0] ?? null : (result.rows?.[0] ?? null);
+
+    return user;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch user.');
   }
 }
