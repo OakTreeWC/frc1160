@@ -8,7 +8,7 @@ const NodeCache = require("node-cache");
 const cache = new NodeCache({ stdTTL: 60, checkperiod: 120 });
 export async function clearCache() {
     const data = await sql`SELECT * FROM sponsors`;
-    cache.set("sponsors", data);
+    await cache.set("sponsors", data);
     revalidatePath("/");
     console.log("cache cleared");
     
