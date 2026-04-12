@@ -10,7 +10,6 @@ export async function clearCache() {
     const data = await sql`SELECT * FROM sponsors`;
     await cache.set("sponsors", data);
     await revalidatePath("/");
-    await revalidatePath("/");
     console.log("cache cleared");
     
 }

@@ -5,6 +5,7 @@ import NavBar from '@/app/ui/navbar';
 import Link from 'next/link';
 import type { Viewport } from 'next';
 import { Analytics } from "@vercel/analytics/next";
+import { Suspense } from 'react';
 
 const sourceSans3 = Source_Sans_3({
   subsets: ["latin"],
@@ -38,7 +39,9 @@ export default function RootLayout({
         className={`${sourceSans3.className} antialiased`}
       >
         <NavBar />
-        {children}
+        <Suspense>
+            {children}
+        </Suspense>
         <footer className="flex flex-col  h-40 absolute w-full bg-white text-black content-center justify-center text-center space-y-4">
             <div className="flex flex-row flex-wrap justify-center content-center space-x-7">
                 <Link href="https://www.instagram.com/titaniumrobotics" className="w-10 h-15 border-b-2 border-b-[#c13584]" >
