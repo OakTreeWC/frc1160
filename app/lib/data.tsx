@@ -6,9 +6,9 @@ const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 // caching
 const NodeCache = require("node-cache");
 const cache = new NodeCache({ stdTTL: 60, checkperiod: 120 });
-
 export async function clearCache() {
     console.log(await cache.flushAll());
+    await new Promise(resolve => setTimeout(resolve, 300));
     revalidatePath("/");
     console.log("cache cleared");
     
