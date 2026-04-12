@@ -12,7 +12,7 @@ export default async function Page() {
         </div>
         <div id="cards" className="pt-20 md:pt-0 relative md:top-full text-black w-full flex flex-col opacity-85 bg-white">
             <div className="py-20 px-10 md:px-45 w-full">
-                <div className="flex flex-row flex-wrap">
+                <div className="flex flex-col space-y-5 md:flex-row md:space-y-0 flex-wrap">
                     <div className="flex flex-col md:basis-1/2 items-center space-y-5 pr-5">
                         <Image src="/FIRST.svg" width={150} height={150} alt="FIRST Logo" />
                         <span className="text-6xl font-light flex flex-col space-y-1">
