@@ -7,21 +7,12 @@ const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 const NodeCache = require("node-cache");
 const cache = new NodeCache({ stdTTL: 60, checkperiod: 120 });
 export async function clearCache() {
-    const data = await sql`SELECT * FROM sponsors`;
-    await cache.set("sponsors", data);
-    await revalidatePath("/");
-    console.log("cache cleared");
-    
+    await revalidatePath("/");    
 }
 
 export async function getSponsors() {
   try {
-    const sponsors: any[] = cache.get("sponsors");
-    if (sponsors) {
-        return sponsors; // Return cached value if available
-    }
     const data = await sql`SELECT * FROM sponsors`;
-    cache.set("sponsors", data);
     return data;
   } catch (error) {
     console.error('Database Error:', error);
