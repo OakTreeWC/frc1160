@@ -12,7 +12,7 @@ export default function Page() {
                             [Ti]-Rex
                         </span>
                         <span className="flex justify-center">
-                            <Image src="/robots/tirex.png" width={635} height={508} alt="Ti-Rex, our 2026 REBUILT Robot" />
+                            <Image src="/robots/tirex/tirex.png" width={635} height={508} alt="Ti-Rex, our 2026 REBUILT Robot" />
                         </span>
                         <span className="text-xl font-light w-[67%]">
                             [Ti]-Rex is Team 1160's 2026 REBUILT Robot. It features a double fixed shooter, expandable hopper, single roller intake, and a cool 67 fuel capacity. 
@@ -47,6 +47,22 @@ export default function Page() {
                                 <span className="text-2xl font-medium pb-1">April 9 to April 12, 2026</span>
                             </span>
                         </span>
+                    </div>
+                </div>
+            </div>
+            <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
+            <div className="py-19 px-10 md:px-45 md:width-[50%]">
+                <div className="flex flex-row justify-center flex-wrap">
+                    <div className="flex flex-col items-center space-y-5 px-8">
+                        <span className="text-6xl font-light flex flex-col space-y-1">
+                            Resources
+                        </span>
+                        <div className="flex justify-center opacity-100">
+                            <Link href="https://cad.onshape.com/documents/f4428a730eece9993b8d3a7c/w/cb27c4e7fa3427cf026b293b" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">OnShape CAD</Link>
+                        </div>
+                        <div className="flex justify-center opacity-100">
+                            <Link href="/robots/tirex/technical.pdf" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Technical Binder</Link>
+                        </div>
                     </div>
                 </div>
             </div>

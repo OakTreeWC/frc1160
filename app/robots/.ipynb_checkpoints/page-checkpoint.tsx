@@ -25,7 +25,7 @@ export default function Page() {
                                 </span>
                             </span>
                             <span className="flex justify-center">
-                                <Image src="/robots/tirex.png" width={635} height={508} alt="Ti-Rex, our 2026 REBUILT Robot" />
+                                <Image src="/robots/tirex/tirex.png" width={635} height={508} alt="Ti-Rex, our 2026 REBUILT Robot" />
                             </span>
                         </Link>
                     </div>
@@ -41,7 +41,7 @@ export default function Page() {
                                 </span>
                             </span>
                             <span className="flex justify-center">
-                                <Image src="/robots/stingray.jpeg" width={635} height={508} alt="Stingray, our 2025 REEFSCAPE Robot" />
+                                <Image src="/robots/stingray/stingray.jpeg" width={635} height={508} alt="Stingray, our 2025 REEFSCAPE Robot" />
                             </span>
                         </Link>
                     </div>

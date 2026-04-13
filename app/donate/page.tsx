@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 export default function Page() {
   return (
-    <main>
-        <div id="cards" className="pt-30 relative text-black w-full flex flex-col opacity-85 bg-white">
+    <main className="h-screen">
+        <div id="cards" className="pt-30 relative text-black w-full h-full flex flex-col opacity-85 bg-white">
             <div className="py-19 px-10 md:px-45 w-full">
                 <div className="flex flex-row flex-wrap">
                     <div className="flex flex-col items-center space-y-7">

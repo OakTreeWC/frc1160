@@ -12,7 +12,7 @@ export default function Page() {
                             S[Ti]ngray
                         </span>
                         <span className="flex justify-center">
-                            <Image src="/robots/tirex.png" width={635} height={508} alt="Ti-Rex, our 2026 REBUILT Robot" />
+                            <Image src="/robots/stingray/stingray.jpeg" width={635} height={508} alt="Ti-Rex, our 2026 REBUILT Robot" />
                         </span>
                         <span className="text-xl font-light w-[67%]">
                             S[Ti]ngray is Team 1160's 2025 REEFSCAPE Robot.
@@ -50,6 +50,22 @@ export default function Page() {
                                 <span>N/A</span>
                             </span>
                         </span>
+                    </div>
+                </div>
+            </div>
+            <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
+            <div className="py-19 px-10 md:px-45 md:width-[50%]">
+                <div className="flex flex-row justify-center flex-wrap">
+                    <div className="flex flex-col items-center space-y-5 px-8">
+                        <span className="text-6xl font-light flex flex-col space-y-1">
+                            Resources
+                        </span>
+                        <div className="flex justify-center opacity-100">
+                            <Link href="https://www.youtube.com/watch?v=LoP4uRPXb0g" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Robot Reveal</Link>
+                        </div>
+                        <div className="flex justify-center opacity-100">
+                            <Link href="/robots/stingray/technical.pdf" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Technical Binder</Link>
+                        </div>
                     </div>
                 </div>
             </div>
