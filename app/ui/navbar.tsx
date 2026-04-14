@@ -51,7 +51,7 @@ export default function NavBar() {
             }
         </span>
 
-        <div className="md:hidden w-12 h-12">
+        <div className="md:hidden w-11 h-11">
             <Dropdown pathname={pathname} links={links} />
         </div>
         

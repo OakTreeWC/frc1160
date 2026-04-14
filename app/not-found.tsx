@@ -9,7 +9,7 @@ export default function Custom404() {
             <span>womp womp</span>
             <span>click vishwa to go home</span>
         </div>
-        <Link href="/"><Image src="/vishwa.webp" width={300} height={300} loading="eager" alt="vishway"></Image></Link>
+        <Link href="/"><Image src="/404/vishwa.webp" width={300} height={300} loading="eager" alt="vishway"></Image></Link>
         
     </main>
   );

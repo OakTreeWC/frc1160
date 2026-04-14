@@ -8,13 +8,13 @@ export default async function Page() {
     <main className="text-center md:text-left">
         
         <div className="z-0 w-full h-screen hidden md:block" >
-            <Image src="/homepage.jpg" height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-cover w-full h-full overflow-hidden bg-center fixed filter brightness-50 hidden md:block" />
+            <Image src="/homepage/homepage.jpg" height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-cover w-full h-full overflow-hidden bg-center fixed filter brightness-50 hidden md:block" />
         </div>
-        <div id="cards" className="pt-20 md:pt-0 relative md:top-full text-black w-full flex flex-col opacity-85 bg-white">
+        <div id="cards" className="pt-20 md:pt-0 relative md:top-full text-black w-full flex flex-col opacity-100 bg-white/85">
             <div className="py-20 px-10 md:px-45 w-full">
-                <div className="flex flex-row flex-wrap">
+                <div className="flex flex-col space-y-5 md:flex-row md:space-y-0 flex-wrap">
                     <div className="flex flex-col md:basis-1/2 items-center space-y-5 pr-5">
-                        <Image src="/FIRST.svg" width={150} height={150} alt="FIRST Logo" />
+                        <Image src="/homepage/FIRST.svg" width={150} height={150} alt="FIRST Logo" />
                         <span className="text-6xl font-light flex flex-col space-y-1">
                             <span>
                                 Team 1160 is a FIRST® FRC Team
@@ -41,7 +41,7 @@ export default async function Page() {
                         </span>
                     </div>
                     <div className="flex flex-col md:basis-1/2 items-center space-y-5 pt-10 md:pt-0">
-                        <Image src="/location-dot-solid.svg" width={100} height={100} alt="Location Pin" />
+                        <Image src="/homepage/location-dot-solid.svg" width={100} height={110} alt="Location Pin" />
                         <span className="text-6xl font-light">
                             Team 1160 is located in San Marino, CA.
                         </span>
@@ -55,7 +55,7 @@ export default async function Page() {
             <div className="py-20 px-10 md:px-45 w-full">
                 <div className="flex flex-col w-full md:w-auto md:flex-row flex-wrap">
                     <span className="md:basis-1/2 items-center">
-                        <Image src="/yippee.jpg" width={1000} height={665} alt="yippe" />
+                        <Image src="/homepage/yippee.jpg" width={1000} height={665} alt="yippe" />
                     </span>
                     <div className="md:basis-1/2 md:pl-7 pt-4 md:pt-0 text-xl font-light">
                         Titanium Robotics is an FRC team with roughly 50 members, mostly from San Marino High School in San Marino, CA, although some members are from surrounding schools and areas such as South Pasadena and Arcadia.
@@ -75,19 +75,19 @@ export default async function Page() {
                     <span className="items-center text-5xl font-light pb-6 text-center">Titanium Sponsors</span>
                     <div className="flex flex-col items-center">
                         <div className="items-center font-light items-stretch">
-                            <div className="hidden md:flex flex-row flex-wrap p-8 space-x-8 space-y-8 justify-center opacity-100">
+                            <div className="hidden md:flex flex-row flex-wrap p-8 space-x-8 space-y-8 justify-center">
                                 <Image src="/sponsors/boing.svg" width={300} height={68} alt="boing boing" className="object-contain" />
-                                <Image src="/sponsors/JPL.svg" width={300} height={88} alt="jet propulsion laboratory" className="object-contain" />
+                                <Image src="/sponsors/JPL.svg" width={300} height={88} alt="jet propulsion laboratory" className="object-contain hidden" />
                                 <Image src="/sponsors/nasa.svg" width={181} height={150} alt="nasa" className="object-contain" />
-                                <Image src="/sponsors/rgsport.svg" width={300} height={150} alt="rgsport" className="object-contain" />
-                                <Image src="/sponsors/disney-employee-matching-gifts.jpg" width={150} height={150} alt="disney employee matching gifts" className="object-contain" />
+                                <Image src="/sponsors/rgsport.webp" width={300} height={150} alt="rgsport" className="object-contain" />
+                                <Image src="/sponsors/disney-employee-matching-gifts.webp" width={150} height={150} alt="disney employee matching gifts" className="object-contain" />
                             </div>
                             <div className="flex flex-col space-y-8 md:hidden opacity-100 items-center">
                                 <Image src="/sponsors/boing.svg" width={300} height={68} alt="boing boing" className="object-contain" />
-                                <Image src="/sponsors/JPL.svg" width={300} height={88} alt="jet propulsion laboratory" className="object-contain" />
+                                <Image src="/sponsors/JPL.svg" width={300} height={88} alt="jet propulsion laboratory" className="object-contain hidden" />
                                 <Image src="/sponsors/nasa.svg" width={181} height={150} alt="nasa" className="object-contain" />
-                                <Image src="/sponsors/rgsport.svg" width={300} height={150} alt="rgsport" className="object-contain" />
-                                <Image src="/sponsors/disney-employee-matching-gifts.jpg" width={150} height={150} alt="disney employee matching gifts" className="object-contain" />
+                                <Image src="/sponsors/rgsport.webp" width={300} height={150} alt="rgsport" className="object-contain" />
+                                <Image src="/sponsors/disney-employee-matching-gifts.webp" width={150} height={150} alt="disney employee matching gifts" className="object-contain" />
                             </div>
                         </div>
                         <div className="text-2xl font-normal flex flex-col space-y-5 pt-10 text-center">

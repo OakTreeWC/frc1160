@@ -15,7 +15,31 @@ export default function Page() {
                             <Image src="/robots/stingray/stingray.jpeg" width={635} height={508} alt="Ti-Rex, our 2026 REBUILT Robot" />
                         </span>
                         <span className="text-xl font-light w-[67%]">
-                            S[Ti]ngray is Team 1160's 2025 REEFSCAPE Robot.
+                            S[Ti]ngray is our 2025 season
+                            competition robot. Last year’s
+                            competition involved scoring “coral,”
+                            which were PVC pipes, onto the“reef,”
+                            a metal structure with prongs
+                            at various heights, removing “algae”
+                            balls from the reef, and climbing onto
+                            a cage to lift our robot completely off
+                            the ground. Our robot was able to
+                            score coral on all levels of the reef,
+                            except the lowest section. Weighing
+                            145 pounds and traveling at a max
+                            speed of 11.5 miles per hour, our robot
+                            was capable of scoring coral on the
+                            reef every 15-25 seconds. To achieve
+                            this, we had a “swerve” drivetrain
+                            base which allows omnidirectional
+                            movement and a two-stage
+                            cascading elevator. Towards the final
+                            30 seconds of the match, our robot
+                            climbs and lifts itself off the ground
+                            using our climber. We used a system
+                            of rack and pinions to drop our
+                            funnel, and our climber deployed
+                            using a winch system.
                         </span>
                     </div>
                 </div>
