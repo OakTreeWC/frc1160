@@ -7,11 +7,11 @@ export default async function Page() {
   return (
     <main className="text-center md:text-left">
         
-        <div className="z-0 w-full h-screen hidden md:block" >
-            <Image src="/homepage/homepage.jpg" height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-cover w-full h-full overflow-hidden bg-center fixed filter brightness-50 hidden md:block" />
+        <div className="z-0 w-full md:h-screen block" >
+            <Image src="/homepage/homepage.jpg" height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-scale-down md:object-cover w-full mt-25 md:mt-0 md:top-0 md:h-full overflow-hidden bg-center md:fixed filter brightness-80 block" />
         </div>
-        <div id="cards" className="pt-20 md:pt-0 relative md:top-full text-black w-full flex flex-col opacity-100 bg-white/85">
-            <div className="py-20 px-10 md:px-45 w-full">
+        <div id="cards" className="pt-10 md:pt-0 relative top-0 md:top-full text-black w-full flex flex-col opacity-100 bg-white/85">
+            <div className="md:py-20 px-10 md:px-45 w-full">
                 <div className="flex flex-col space-y-5 md:flex-row md:space-y-0 flex-wrap">
                     <div className="flex flex-col md:basis-1/2 items-center space-y-5 pr-5">
                         <Image src="/homepage/FIRST.svg" width={150} height={150} alt="FIRST Logo" />
@@ -40,7 +40,7 @@ export default async function Page() {
                             
                         </span>
                     </div>
-                    <div className="flex flex-col md:basis-1/2 items-center space-y-5 pt-10 md:pt-0">
+                    <div className="flex flex-col md:basis-1/2 items-center space-y-5 py-20 md:pt-0">
                         <Image src="/homepage/location-dot-solid.svg" width={100} height={110} alt="Location Pin" />
                         <span className="text-6xl font-light">
                             Team 1160 is located in San Marino, CA.
@@ -71,24 +71,16 @@ export default async function Page() {
             </div>
             <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
             <div className="py-20 px-10 md:px-45 w-full">
-                <div className="flex flex-col">
+                <div className="flex flex-col items-center">
                     <span className="items-center text-5xl font-light pb-6 text-center">Titanium Sponsors</span>
-                    <div className="flex flex-col items-center">
-                        <div className="items-center font-light items-stretch">
-                            <div className="hidden md:flex flex-row flex-wrap p-8 space-x-8 space-y-8 justify-center">
-                                <Image src="/sponsors/boing.svg" width={300} height={68} alt="boing boing" className="object-contain" />
-                                <Image src="/sponsors/JPL.svg" width={300} height={88} alt="jet propulsion laboratory" className="object-contain hidden" />
-                                <Image src="/sponsors/nasa.svg" width={181} height={150} alt="nasa" className="object-contain" />
-                                <Image src="/sponsors/rgsport.webp" width={300} height={150} alt="rgsport" className="object-contain" />
-                                <Image src="/sponsors/disney-employee-matching-gifts.webp" width={150} height={150} alt="disney employee matching gifts" className="object-contain" />
-                            </div>
-                            <div className="flex flex-col space-y-8 md:hidden opacity-100 items-center">
-                                <Image src="/sponsors/boing.svg" width={300} height={68} alt="boing boing" className="object-contain" />
-                                <Image src="/sponsors/JPL.svg" width={300} height={88} alt="jet propulsion laboratory" className="object-contain hidden" />
-                                <Image src="/sponsors/nasa.svg" width={181} height={150} alt="nasa" className="object-contain" />
-                                <Image src="/sponsors/rgsport.webp" width={300} height={150} alt="rgsport" className="object-contain" />
-                                <Image src="/sponsors/disney-employee-matching-gifts.webp" width={150} height={150} alt="disney employee matching gifts" className="object-contain" />
-                            </div>
+                    <div className="items-center font-light items-stretch">
+                        <div className="flex flex-col md:flex-row flex-wrap pt-8 md:p-8 md:space-x-8 space-y-8 justify-center items-center">
+                            <Image src="/sponsors/boing.svg" width={300} height={68} alt="boing boing" className="object-contain" />
+                            <Image src="/sponsors/JPL.svg" width={300} height={88} alt="jet propulsion laboratory" className="object-contain hidden" />
+                            <Image src="/sponsors/nasa.svg" width={181} height={150} alt="nasa" className="object-contain" />
+                            <Image src="/sponsors/northropgrumman.png" width={300} height={150} alt="nasa" className="object-contain" />
+                            <Image src="/sponsors/rgsport.webp" width={300} height={150} alt="rgsport" className="object-contain" />
+                            <Image src="/sponsors/disney-employee-matching-gifts.webp" width={150} height={150} alt="disney employee matching gifts" className="object-contain" />
                         </div>
                         <div className="text-2xl font-normal flex flex-col space-y-5 pt-10 text-center">
                             {

@@ -88,7 +88,7 @@ export default function Page() {
                             <Link href="https://www.youtube.com/watch?v=LoP4uRPXb0g" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Robot Reveal</Link>
                         </div>
                         <div className="flex justify-center opacity-100">
-                            <Link href="/robots/stingray/technical.pdf" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Technical Binder</Link>
+                            <Link href="/robots/stingray/technical.pdf" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400 hidden">Technical Binder</Link>
                         </div>
                     </div>
                 </div>

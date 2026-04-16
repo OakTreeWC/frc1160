@@ -61,7 +61,7 @@ export default function Page() {
                             <Link href="https://cad.onshape.com/documents/f4428a730eece9993b8d3a7c/w/cb27c4e7fa3427cf026b293b" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">OnShape CAD</Link>
                         </div>
                         <div className="flex justify-center opacity-100">
-                            <Link href="/robots/tirex/technical.pdf" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Technical Binder</Link>
+                            <Link href="/robots/tirex/2026 Rebuilt Tech Binder.pdf" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Technical Binder</Link>
                         </div>
                     </div>
                 </div>

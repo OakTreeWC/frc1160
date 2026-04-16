@@ -13,15 +13,16 @@ export default function NavBar() {
       {"name":"Home","href":"/"},
       {"name":"About Us", "href":"/aboutus"},
       {"name":"Mentors","href":"/mentors"},
+      {"name":"Cabinet","href":"/cabinet/engineering", "alt":"/cabinet/business"},
       {"name":"Robots","href":"/robots"},
       {"name":"Resources","href":"/resources"},
       {"name":"Donate","href":"/donate"},
       {"name":"Login","href":"https://admin.wchen.dev"},
   ]
   return (
-    <main className = {`flex flex-row space-x-0 justify-left items-center bg-white p-0 h-25 absolute inset-0 z-10 md:bg-transparent opacity-90`} style={{width:"100%"}}>
+    <main className = {`flex flex-row space-x-0 justify-left items-center p-0 h-25 absolute inset-0 z-10 bg-white md:bg-white/85 w-full`}>
         <Link
-        className="flex items-center h-full flex-shrink-0 flex-grow-0 bg-white"
+        className="flex items-center h-full flex-shrink-0 flex-grow-0 bg-white/85"
         href="/"
         >
             <TiLogo />
@@ -32,7 +33,7 @@ export default function NavBar() {
             />
         
         <span 
-            className = {`flex flex-row space-x-0 justify-left bg-white p-0 h-25 hidden md:flex w-full`}  
+            className = {`flex flex-row space-x-0 justify-left bg-white/85 p-0 h-25 hidden md:flex w-full`}  
             >
             {
                 links.map((link)=>{
@@ -42,7 +43,7 @@ export default function NavBar() {
                             className = {`text-xl flex items-center justify-center align-middle p-4 bg-clear text-black`} 
                             href={link.href}
                         >
-                            <p className={clsx("hover:border-blue-500 border-4 px-2 py-1.5",{'border-blue-500' : pathname === link.href,'border-transparent':pathname !== link.href},)}>
+                            <p className={clsx("transition hover:border-blue-500 border-4 px-2 py-1.5",{'border-blue-500' : pathname === link.href || pathname === link.alt,'border-transparent': !(pathname === link.href || pathname === link.alt)},)}>
                                 {link.name}
                             </p>
                         </Link>

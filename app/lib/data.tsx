@@ -8,6 +8,8 @@ const NodeCache = require("node-cache");
 const cache = new NodeCache({ stdTTL: 60, checkperiod: 120 });
 export async function clearCache() {
     await revalidatePath("/");    
+    await revalidatePath("/cabinet/engineering");
+    await revalidatePath("/cabinet/business");
 }
 
 export async function getSponsors() {
@@ -94,5 +96,25 @@ export async function getUser(email: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch user.');
+  }
+}
+
+export async function getEngineering() {
+  try {
+    const data = await sql`SELECT * FROM engineering`;
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch sponsors.');
+  }
+}
+
+export async function getBusiness() {
+  try {
+    const data = await sql`SELECT * FROM business`;
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch sponsors.');
   }
 }
