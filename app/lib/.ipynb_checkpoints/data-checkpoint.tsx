@@ -3,13 +3,10 @@ import postgres from 'postgres';
 import { revalidatePath } from 'next/cache'; 
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
-// caching
-const NodeCache = require("node-cache");
-const cache = new NodeCache({ stdTTL: 60, checkperiod: 120 });
 export async function clearCache() {
-    await revalidatePath("/");    
-    await revalidatePath("/cabinet/engineering");
-    await revalidatePath("/cabinet/business");
+    revalidatePath("/");    
+    revalidatePath("/cabinet/engineering");
+    revalidatePath("/cabinet/business");
 }
 
 export async function getSponsors() {
