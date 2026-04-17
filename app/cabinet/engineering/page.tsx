@@ -27,11 +27,11 @@ export default async function Page() {
                     engineering.map((member)=>{
                         if (bg===0) {bg=1} else {bg=0}
                         return (
-                            <div key={member.name} className={clsx(`flex flex-col space-y-7 md:space-y-0 md:flex-row flex-wrap justify-center py-7 px-10 w-full`,{'bg-[#a9c4e6]/67 md:bg-inherit':bg===1})}>
+                            <div key={member.name} className={clsx(`flex flex-col space-y-7 md:space-y-0 md:flex-row flex-wrap justify-center py-7 px-10 w-full md:px-0`,{'bg-[#a9c4e6]/67 md:bg-inherit':bg===1})}>
                                 <div className="flex flex-col md:basis-1/3 items-center justify-center space-y-5">
                                     <Image src={"/cabinet/engineering/"+member.name.toLowerCase().replace(/\s+/g, '')+".jpg"} width={410} height={615} loading="eager" alt={member.name}></Image>
                                 </div>
-                                <div className="flex flex-col md:basis-2/3 items-left px-8 space-y-2">
+                                <div className="flex flex-col md:basis-2/3 items-left pl-8 space-y-2">
                                     <span className="text-5xl font-light flex flex-col space-y-1">
                                         <span>{member.name}</span>
                                         <span className="text-2xl font-medium">{member.position}</span>

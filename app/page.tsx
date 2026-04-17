@@ -4,6 +4,14 @@ import { getSponsors } from '@/app/lib/data';
 
 export default async function Page() {
   let sponsors = await getSponsors();
+  const fs = require('fs');
+  const path = require('path');
+  const files = fs.readdirSync('./public/sponsors');
+  console.log(files); // Array of file and folder names
+  const images = files.filter((file: string) => {
+    return ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp'].includes(path.extname(file).toLowerCase());
+  });
+
   return (
     <main className="text-center md:text-left">
         
@@ -75,12 +83,21 @@ export default async function Page() {
                     <span className="items-center text-5xl font-light pb-6 text-center">Titanium Sponsors</span>
                     <div className="items-center font-light items-stretch">
                         <div className="flex flex-col md:flex-row flex-wrap pt-8 md:p-8 md:space-x-8 space-y-8 justify-center items-center">
-                            <Image src="/sponsors/boing.svg" width={300} height={68} alt="boing boing" className="object-contain" />
-                            <Image src="/sponsors/JPL.svg" width={300} height={88} alt="jet propulsion laboratory" className="object-contain hidden" />
-                            <Image src="/sponsors/nasa.svg" width={181} height={150} alt="nasa" className="object-contain" />
-                            <Image src="/sponsors/northropgrumman.png" width={300} height={150} alt="nasa" className="object-contain" />
-                            <Image src="/sponsors/rgsport.webp" width={300} height={150} alt="rgsport" className="object-contain" />
-                            <Image src="/sponsors/disney-employee-matching-gifts.webp" width={150} height={150} alt="disney employee matching gifts" className="object-contain" />
+                            {
+                                images.map((image: string) => {
+                                    console.log(images);
+                                    return (
+                                      <Image
+                                        key={image}
+                                        src={`/sponsors/${image}`}
+                                        width={300}
+                                        height={150}
+                                        alt={image}
+                                        className="object-contain"
+                                      />
+);
+                                })
+                            }
                         </div>
                         <div className="text-2xl font-normal flex flex-col space-y-5 pt-10 text-center">
                             {
