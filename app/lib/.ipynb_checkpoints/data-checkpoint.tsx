@@ -101,7 +101,7 @@ export async function getUser(email: string) {
 
 export async function getEngineering() {
   try {
-    const data = await sql`SELECT * FROM engineering`;
+    const data = await sql`SELECT * FROM engineering ORDER BY sort`;
     return data;
   } catch (error) {
     console.error('Database Error:', error);
@@ -111,7 +111,7 @@ export async function getEngineering() {
 
 export async function getBusiness() {
   try {
-    const data = await sql`SELECT * FROM business`;
+    const data = await sql`SELECT * FROM business ORDER BY sort`;
     return data;
   } catch (error) {
     console.error('Database Error:', error);
