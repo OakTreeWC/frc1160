@@ -7,6 +7,7 @@ import type { Viewport } from 'next';
 import { Analytics } from "@vercel/analytics/next";
 import { Suspense } from 'react';
 
+
 const sourceSans3 = Source_Sans_3({
   subsets: ["latin"],
 });
