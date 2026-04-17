@@ -85,7 +85,6 @@ export default async function Page() {
                         <div className="flex flex-col md:flex-row flex-wrap pt-8 md:p-8 md:space-x-8 space-y-8 justify-center items-center">
                             {
                                 images.map((image: string) => {
-                                    console.log(images);
                                     return (
                                       <Image
                                         key={image}

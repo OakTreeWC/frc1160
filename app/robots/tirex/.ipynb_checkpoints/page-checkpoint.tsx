@@ -15,7 +15,7 @@ export default function Page() {
                             <Image src="/robots/tirex/tirex.png" width={635} height={508} alt="Ti-Rex, our 2026 REBUILT Robot" />
                         </span>
                         <span className="text-xl font-light w-[67%]">
-                            [Ti]-Rex is Team 1160's 2026 REBUILT Robot. It features a double fixed shooter, expandable hopper, single roller intake, and a cool 67 fuel capacity. 
+                            [Ti]-Rex is Team 1160's 2026 REBUILT Robot. It features a double fixed shooter, expandable hopper, single roller intake, and a cool 67 fuel capacity.
                         </span>
                     </div>
                 </div>
@@ -45,6 +45,9 @@ export default function Page() {
                             <span className="text-2xl font-light flex flex-col justify-center text-center space-y-1">
                                 <span className="text-3xl font-medium">FIRST California Southern State Championship</span>
                                 <span className="text-2xl font-medium pb-1">April 9 to April 12, 2026</span>
+                                <span>Team 1160 was Rank 41 with a record of 5-7-0</span>
+                                <span className="text-2xl font-normal">Awards</span>
+                                <span>Team Sustainability Award sponsored by Dow</span>
                             </span>
                         </span>
                     </div>
