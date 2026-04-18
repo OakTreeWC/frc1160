@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from 'next/link';
 import { getSponsors } from '@/app/lib/data';
-
+export const dynamic = 'force-static';
 export default async function Page() {
   let sponsors = await getSponsors();
   const fs = require('fs');
   const path = require('path');
-  const files = fs.readdirSync('./public/sponsors');
+  const files = ['1boeing.svg','2northropgrumman.png','3nasa.svg','4rgsport.webp','5disney-employee-matching-gifts.webp']
   console.log(files); // Array of file and folder names
   const images = files.filter((file: string) => {
     return ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp'].includes(path.extname(file).toLowerCase());
