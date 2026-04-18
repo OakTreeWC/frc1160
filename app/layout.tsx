@@ -13,12 +13,11 @@ const sourceSans3 = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://titaniumrobotics.wchen.dev"),
     title: "Titanium Robotics | 1160",
-    description: "The Official Titanium Robotics FRC Website",
+    description: "The Un-Official Titanium Robotics FRC Website",
     keywords: ["FRC", "Titanium Robotics", "Team 1160","San Marino", "Robotics",],
     creator: "William Chen",
-    referrer: 'origin-when-cross-origin'
+    referrer: 'origin-when-cross-origin',
 };
 
 // Source - https://stackoverflow.com/a/77566936
