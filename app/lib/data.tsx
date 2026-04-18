@@ -4,9 +4,11 @@ import { revalidatePath } from 'next/cache';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 export async function clearCache() {
-    revalidatePath("/");    
-    revalidatePath("/cabinet/engineering");
-    revalidatePath("/cabinet/business");
+    console.log("revalidating paths");
+    await revalidatePath("/");    
+    await revalidatePath("/cabinet/engineering");
+    await revalidatePath("/cabinet/business");
+    console.log("revalidated paths");
 }
 
 export async function getSponsors() {
