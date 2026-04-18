@@ -101,6 +101,7 @@ export default async function Page() {
                         <div className="text-2xl font-normal flex flex-col space-y-5 pt-10 text-center">
                             {
                                 sponsors.map((sponsor) => {
+                                    console.log(sponsor)
                                     return (<span key={sponsor.name}>{sponsor.name}</span>);
                                 })
                             }

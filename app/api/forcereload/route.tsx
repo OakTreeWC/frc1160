@@ -2,6 +2,21 @@ import checkCredentials from '@/app/lib/checkCredentials';
 import { clearCache } from '@/app/lib/data';
 import crypto from 'crypto';
 
+function splitOnFirst(str : string, separator : string) {
+  // Find the index of the first occurrence of the separator.
+  let index = str.indexOf(separator);
+
+  // If the separator is not found, return the original string in an array.
+  if (index === -1) {
+    return [str];
+  }
+
+  // Slice the string into two parts.
+  let part1 = str.slice(0, index);
+  let part2 = str.slice(index + separator.length);
+
+  return [part1, part2];
+}
 
 export async function POST(request: Request) {
   try {
@@ -12,7 +27,9 @@ export async function POST(request: Request) {
 
     const base64Credentials = authHeader.split(' ')[1] ?? '';
     const credentials = Buffer.from(base64Credentials, 'base64').toString('utf-8');
-    const [username, password] = credentials.split(':');
+    const [username, password] = splitOnFirst(credentials, ":");
+    console.log(username);
+    console.log(password);
 
     if (!username || !password) {
       return new Response(JSON.stringify({ error: 'Invalid credentials format' }), { status: 400 });
