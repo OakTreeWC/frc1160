@@ -1,6 +1,7 @@
+'use server';
 import checkCredentials from '@/app/lib/checkCredentials';
-import { clearCache } from '@/app/lib/data';
 import crypto from 'crypto';
+import { revalidatePath } from 'next/cache';
 
 function splitOnFirst(str : string, separator : string) {
   // Find the index of the first occurrence of the separator.
@@ -39,7 +40,7 @@ export async function POST(request: Request) {
     console.log(user);
     if (!user) return new Response(JSON.stringify({ error: 'User not found' }), { status: 404 });
 
-    await clearCache();
+    revalidatePath("/");
       
     return new Response(JSON.stringify({ username }), { status: 200 });
   } catch (err) {

@@ -3,11 +3,6 @@ import postgres from 'postgres';
 import { revalidatePath } from 'next/cache'; 
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
-export async function clearCache() {
-    console.log("revalidating paths");
-    await revalidatePath("/", "layout");    
-    console.log("revalidated paths");
-}
 
 export async function getSponsors() {
   try {
