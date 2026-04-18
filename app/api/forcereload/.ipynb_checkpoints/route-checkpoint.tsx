@@ -41,6 +41,8 @@ export async function POST(request: Request) {
     if (!user) return new Response(JSON.stringify({ error: 'User not found' }), { status: 404 });
 
     revalidatePath("/");
+    revalidatePath("/cabinet/business");
+    revalidatePath("/cabinet/engineering");
       
     return new Response(JSON.stringify({ username }), { status: 200 });
   } catch (err) {
