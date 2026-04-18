@@ -6,7 +6,6 @@ export default async function Page() {
   let sponsors = await getSponsors();
 
   const files = ['1boeing.svg','2northropgrumman.png','3nasa.svg','4rgsport.webp','5disney-employee-matching-gifts.webp']
-  console.log(files); // Array of file and folder names
   const path = require("path");
   const images = files.filter((file: string) => {
     return ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp'].includes(path.extname(file).toLowerCase());
@@ -101,7 +100,6 @@ export default async function Page() {
                         <div className="text-2xl font-normal flex flex-col space-y-5 pt-10 text-center">
                             {
                                 sponsors.map((sponsor) => {
-                                    console.log(sponsor)
                                     return (<span key={sponsor.name}>{sponsor.name}</span>);
                                 })
                             }
