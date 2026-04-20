@@ -6,6 +6,7 @@ import TiLogo from '@/app/ui/TiLogo';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import Dropdown from '@/app/ui/dropdown';
+import { signIn } from "next-auth/react";
 
 export default function NavBar() {
   const pathname = usePathname();
@@ -17,7 +18,6 @@ export default function NavBar() {
       {"name":"Robots","href":"/robots"},
       {"name":"Resources","href":"/resources"},
       {"name":"Donate","href":"/donate"},
-      {"name":"Login","href":"https://admin.wchen.dev"},
   ]
   return (
     <main className = {`flex flex-row space-x-0 justify-left items-center p-0 h-25 absolute inset-0 z-10 bg-white md:bg-white/85 w-full`}>
@@ -50,6 +50,9 @@ export default function NavBar() {
                     )
                 })
             }
+            <button onClick={() => signIn("google")} className = {`text-xl flex items-center justify-center align-middle bg-clear text-black`}><p className={"transition border-transparent hover:border-blue-500 border-4 px-2 py-1.5 hover:cursor-pointer"}>
+                Login
+            </p></button>
         </span>
 
         <div className="md:hidden w-11 h-11">
