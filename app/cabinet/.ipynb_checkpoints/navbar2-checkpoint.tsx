@@ -8,7 +8,7 @@ export default function Navbar2() {
   const links = [
       {"name":"Engineering","href":"/cabinet/engineering"},
       {"name":"Business", "href":"/cabinet/business"},
-      {"name":"The Overlord", "href":"/cabinet/overlord"}
+      //{"name":"The Overlord", "href":"/cabinet/overlord"}
   ]
   return (
     <main className = {`flex flex-row space-x-0 justify-left items-center md:p-0  md:h-25 absolute top-25 z-10 md:bg-transparent w-full`}>

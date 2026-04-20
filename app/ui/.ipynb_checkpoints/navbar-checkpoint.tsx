@@ -33,14 +33,14 @@ export default function NavBar() {
             />
         
         <span 
-            className = {`flex flex-row space-x-0 justify-left bg-white/85 p-0 h-25 hidden md:flex w-full`}  
+            className = {`flex flex-row space-x-8 justify-left bg-white/85 p-0 pr-7 h-25 hidden md:flex w-full overflow-x-auto`}  
             >
             {
                 links.map((link)=>{
                     return (
                         <Link 
                             key = {link.name}
-                            className = {`text-xl flex items-center justify-center align-middle p-4 bg-clear text-black`} 
+                            className = {`text-xl flex items-center justify-center align-middle bg-clear text-black`} 
                             href={link.href}
                         >
                             <p className={clsx("transition hover:border-blue-500 border-4 px-2 py-1.5",{'border-blue-500' : pathname === link.href || pathname === link.alt,'border-transparent': !(pathname === link.href || pathname === link.alt)},)}>

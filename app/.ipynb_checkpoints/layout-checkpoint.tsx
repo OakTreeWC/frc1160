@@ -13,13 +13,11 @@ const sourceSans3 = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL("https://titaniumrobotics.wchen.dev"),
     title: "Titanium Robotics | 1160",
     description: "The Un-Official Titanium Robotics FRC Website",
     keywords: ["FRC", "Titanium Robotics", "Team 1160","San Marino", "Robotics",],
     creator: "William Chen",
     referrer: 'origin-when-cross-origin',
-  
 };
 
 // Source - https://stackoverflow.com/a/77566936
@@ -63,6 +61,9 @@ export default function RootLayout({
                 </div>
                 <Link href="https://maps.app.goo.gl/4nZ67bJcaSAxxznT6" className="text-black font-normal text-gray-500 underline">
                     2701 Huntington Dr, San Marino, CA 91108
+                </Link>
+                <Link href="https://maps.app.goo.gl/4nZ67bJcaSAxxznT6" className="text-black font-normal text-gray-500 underline hidden">
+                    Notice a Problem?
                 </Link>
                 <span className="text-black font-normal text-gray-500">
                     © {currentYear} Titanium Robotics. All rights reserved.

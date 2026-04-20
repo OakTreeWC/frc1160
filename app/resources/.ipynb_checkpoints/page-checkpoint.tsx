@@ -5,19 +5,17 @@ export default function Page() {
   return (
     <main className="h-screen">
         <div id="cards" className="pt-30 relative text-black w-full h-full flex flex-col opacity-85 bg-white">
-            <div className="pt-19 pb-9 px-10 md:px-45 w-full">
-                <div className="flex flex-row flex-wrap justify-center">
-                    <div className="flex flex-col items-center space-y-7">
-                        <span className="text-6xl font-light flex flex-col space-y-1">
-                            Resources
-                        </span>
-                        
-                        
+            <div className="py-19 px-10 md:px-45 w-full">
+                    <div className="flex flex-row justify-center flex-wrap">
+                        <div className="flex flex-col items-center space-y-5 px-8 text-center">
+                            <span className="text-6xl font-light flex flex-col space-y-2">
+                                Resources
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
             <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
-            <div className="pt-9 px-10 md:px-45 w-full">
+            <div className="py-19 px-10 md:px-45 w-full">
                 <div className="flex flex-row flex-wrap justify-center">
                     <div className="flex flex-col items-center space-y-7">
                         <div className="flex justify-center opacity-100">
