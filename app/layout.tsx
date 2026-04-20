@@ -62,6 +62,9 @@ export default function RootLayout({
                 <Link href="https://maps.app.goo.gl/4nZ67bJcaSAxxznT6" className="text-black font-normal text-gray-500 underline">
                     2701 Huntington Dr, San Marino, CA 91108
                 </Link>
+                <Link href="https://maps.app.goo.gl/4nZ67bJcaSAxxznT6" className="text-black font-normal text-gray-500 underline hidden">
+                    Notice a Problem?
+                </Link>
                 <span className="text-black font-normal text-gray-500">
                     © {currentYear} Titanium Robotics. All rights reserved.
                 </span>

@@ -7,7 +7,7 @@ export default function Page() {
         <div id="cards" className="pt-30 relative text-black w-full flex flex-col opacity-85 bg-white">
             <div className="pb-19 md:py-19 px-10 md:px-45 w-full">
                 <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 justify-center flex-wrap">
-                    <div className="flex flex-col md:basis-1/4 items-center justify-center text-center space-y-3 font-light text-xl pt-10 md:pt-0">
+                    <div className="flex flex-col md:basis-1/5 items-center justify-center text-center space-y-3 font-light text-xl pt-10 md:pt-0">
                         <div className="flex flex-col space-y-1">
                             <span className="font-medium">ROOKIE YEAR</span>
                             <span>2003</span>
@@ -21,7 +21,7 @@ export default function Page() {
                             <Link href="https://www.sanmarinohs.org" className="text-blue-500 underline">San Marino High School</Link>
                         </div>
                     </div>
-                    <div className="flex flex-col md:basis-3/4 items-center space-y-5">
+                    <div className="flex flex-col md:basis-4/5 items-center space-y-5">
                         <span className="text-6xl font-light flex flex-col space-y-1">
                             Our Mission
                         </span>

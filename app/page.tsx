@@ -18,8 +18,8 @@ export default async function Page() {
             <Image src="/homepage/homepage.jpg" height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-scale-down md:object-cover w-full mt-25 md:mt-0 md:top-0 md:h-full overflow-hidden bg-center md:fixed filter brightness-80 block" />
         </div>
         <div id="cards" className="pt-10 md:pt-0 relative top-0 md:top-full text-black w-full flex flex-col opacity-100 bg-white/85">
-            <div className="md:py-20 px-10 md:px-45 w-full">
-                <div className="flex flex-col space-y-5 md:flex-row md:space-y-0 flex-wrap">
+            <div className="md:py-20 px-10 md:px-[10vw] w-full">
+                <div className="flex flex-col space-y-3 md:flex-row md:space-y-8 flex-wrap justify-center items-start">
                     <div className="flex flex-col md:basis-1/2 items-center space-y-5 pr-5">
                         <Image src="/homepage/FIRST.svg" width={150} height={150} alt="FIRST Logo" />
                         <span className="text-6xl font-light flex flex-col space-y-1">
