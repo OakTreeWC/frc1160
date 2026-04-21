@@ -72,7 +72,7 @@ export default function Page() {
                             <span className="flex flex-row flex-wrap justify-center items-center"><b>Current Occupation :</b>&nbsp;Digital & Electronics Design Engineer</span>
                         </span>
                         <span className="text-xl font-light">
-                            biz gotta make a fancy summary. 
+                            Shawn Thai has been with the team 5 years as a mentor, 4 years as a student, class of 2018. As a mentor, he primarily helps with the design and electronics aspect of robotics. Shawn is an Digital Electronics Engineer at Northrop Grumman in Redondo Beach, CA. In his free time, he enjoys playing video games, hiking, and majong.
                         </span>
                     </div>
                     
