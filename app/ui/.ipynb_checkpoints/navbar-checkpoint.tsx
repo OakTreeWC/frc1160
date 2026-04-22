@@ -6,9 +6,12 @@ import TiLogo from '@/app/ui/TiLogo';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import Dropdown from '@/app/ui/dropdown';
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react"
+
 
 export default function NavBar() {
+  const { data: session } = useSession();
   const pathname = usePathname();
   const links = [
       {"name":"Home","href":"/"},
@@ -33,7 +36,7 @@ export default function NavBar() {
             />
         
         <span 
-            className = {`flex flex-row space-x-8 justify-left bg-white/85 p-0 pr-7 h-25 hidden md:flex w-full overflow-x-auto`}  
+            className = {`flex flex-row space-x-8 justify-left bg-white/85 p-0 pl-2 pr-7 h-25 hidden md:flex w-full overflow-x-auto`}  
             >
             {
                 links.map((link)=>{
@@ -50,8 +53,16 @@ export default function NavBar() {
                     )
                 })
             }
-            <button onClick={() => signIn("google")} className = {`text-xl flex items-center justify-center align-middle bg-clear text-black`}><p className={"transition border-transparent hover:border-blue-500 border-4 px-2 py-1.5 hover:cursor-pointer"}>
-                Login
+            <Link 
+                className = {clsx(`text-xl flex items-center justify-center align-middle bg-clear text-black`,{"hidden":!session})} 
+                href="/admin"
+            >
+                <p className={clsx("transition hover:border-blue-500 border-4 px-2 py-1.5",{'border-blue-500' : pathname === "/admin",'border-transparent': !(pathname === "/admin")},)}>
+                    Admin
+                </p>
+            </Link>
+            <button onClick={() => signOut({ redirectTo: "/" })} className = {clsx(`text-xl flex items-center justify-center align-middle bg-clear text-black`, {'hidden':!session})}><p className={"transition border-transparent hover:border-blue-500 border-4 px-2 py-1.5 hover:cursor-pointer"}>
+                Logout
             </p></button>
         </span>
 

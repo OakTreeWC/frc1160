@@ -81,14 +81,37 @@ export async function getUser(email: string) {
     // If using a tagged-template SQL helper that accepts parameters inline:
     const result: any[] = await sql`SELECT * FROM users WHERE email = ${email} LIMIT 1;`;
 
-    // If result is a rows array (common), grab first row; otherwise adapt to your client
-    const user = result[0];
-
-    return user;
+    if (result[0]) {
+        return true
+    } else { return false }
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch user.');
   }
+}
+
+export async function createInvite(email: string) {
+    try {
+        await sql`INSERT INTO invites VALUES (${email})`;
+        const result: any[] = await sql`SELECT * FROM invites WHERE email = ${email} LIMIT 1;`;
+        return result
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch user.');
+    }
+}
+
+export async function checkInvites(email: string) {
+    try {
+        const result: any[] = await sql`SELECT * FROM invites WHERE email = ${email} LIMIT 1;`;
+        if (result[0]) {
+            await sql`DELETE FROM invites WHERE email = ${email};`;
+            return true
+        } else { return false }
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch user.');
+    }
 }
 
 export async function getEngineering() {
