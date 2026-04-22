@@ -30,7 +30,7 @@ export async function addSponsors(sponsors: any[]) {
   }
 }
 
-export async function removeSponsor(sponsor: any[]) {
+export async function removeSponsor(sponsor: string) {
   try {
       await sql`DELETE FROM sponsors WHERE ctid IN (
         SELECT ctid

@@ -1,12 +1,10 @@
 import { auth } from '@/auth';
-import { addSponsors, getSponsors } from '@/app/lib/data';
+import { addSponsors, getSponsors, removeSponsor } from '@/app/lib/data';
 import { revalidatePath } from 'next/cache';
 
 export default async function Page() {
-  // ✅ Fetch sponsors from DB
   const sponsors = await getSponsors();
 
-  // ✅ Server Action
   async function createSponsor(formData: FormData) {
     'use server';
 
@@ -21,7 +19,24 @@ export default async function Page() {
 
     await addSponsors([sponsor]);
 
-    // 🔁 Re-fetch data after mutation
+    revalidatePath('/admin/sponsors');
+    revalidatePath('/');
+  }
+
+  async function deleteSponsor(formData: FormData) {
+    'use server';
+
+    const session = await auth();
+    if (!session?.user) {
+      throw new Error('Unauthorized');
+    }
+
+    const sponsor = formData.get('sponsor') as string;
+
+    if (!sponsor) return;
+
+    await removeSponsor(sponsor);
+
     revalidatePath('/admin/sponsors');
     revalidatePath('/');
   }
@@ -34,7 +49,7 @@ export default async function Page() {
             <div className="flex flex-row justify-center flex-wrap">
                 <div className="flex flex-col items-center space-y-5">
                     <span className="text-6xl font-light flex flex-col space-y-1">
-                        Admin Dashboard
+                        Sponsors
                     </span>
                 </div>
             </div>
@@ -77,7 +92,14 @@ export default async function Page() {
                   className="flex justify-between items-center bg-white p-2 rounded"
                 >
                   <span>{sponsor.name}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="h-5 w-5" ><path d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"/></svg>
+                  <form action={deleteSponsor} className="h-5 w-5">
+                    <input type="hidden" name="sponsor" value={sponsor.name} />
+                    <button type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="h-5 w-5 hover:cursor-pointer">
+                            <path d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-32-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"/>
+                        </svg>
+                    </button>
+                  </form>
                 </div>
               ))
             )}
