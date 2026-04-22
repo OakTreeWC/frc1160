@@ -44,38 +44,6 @@ export async function removeSponsor(sponsor: string) {
   }
 }
 
-export async function addUser(user: any) {
-  try {
-      user = user[0];
-      await sql`
-        CREATE TABLE IF NOT EXISTS users (
-          name VARCHAR(255) NOT NULL,
-          email TEXT NOT NULL UNIQUE,
-          password TEXT NOT NULL
-        );
-      `;
-      await sql`INSERT INTO users VALUES (${user.name},${user.email},${user.password})`;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to add user.');
-  }
-}
-
-export async function removeUser(user: any) {
-  try {
-      user = user[0];
-      await sql`DELETE FROM users WHERE ctid IN (
-        SELECT ctid
-        FROM users
-        WHERE email = ${user.email}
-        LIMIT 1
-      )`;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to delete user.');
-  }
-}
-
 export async function getUser(email: string) {
   try {
     // If using a tagged-template SQL helper that accepts parameters inline:
@@ -101,6 +69,16 @@ export async function createInvite(email: string) {
     }
 }
 
+export async function getInvites() {
+  try {
+    const data = await sql`SELECT * FROM invites`;
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch invites.');
+  }
+}
+
 export async function checkInvites(email: string) {
     try {
         const result: any[] = await sql`SELECT * FROM invites WHERE email = ${email} LIMIT 1;`;
@@ -114,6 +92,23 @@ export async function checkInvites(email: string) {
     }
 }
 
+export async function createEngineering(name: string, position: string, grade: string, years: string) {
+  try {
+      await sql`
+        CREATE TABLE IF NOT EXISTS engineering (
+          name VARCHAR(100) NOT NULL,
+          position VARCHAR(100) NOT NULL,
+          grade INT NOT NULL,
+          years INT NOT NULL
+        );
+      `;
+      await sql`INSERT INTO engineering (name, position, grade, years) VALUES (${name}, ${position}, ${grade}, ${years})`;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to add sponsor.');
+  }
+}
+
 export async function getEngineering() {
   try {
     const data = await sql`SELECT * FROM engineering ORDER BY sort`;
@@ -121,6 +116,32 @@ export async function getEngineering() {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch sponsors.');
+  }
+}
+
+export async function removeEngineering(name: string, position: string, grade: string, years: string) {
+    try {
+        await sql`DELETE FROM engineering WHERE name = ${name} AND position = ${position} AND grade = ${grade} AND years = ${years};`;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to remove user.');
+    }
+}
+
+export async function createBusiness(name: string, position: string, grade: string, years: string) {
+  try {
+      await sql`
+        CREATE TABLE IF NOT EXISTS business (
+          name VARCHAR(100) NOT NULL,
+          position VARCHAR(100) NOT NULL,
+          grade INT NOT NULL,
+          years INT NOT NULL
+        );
+      `;
+      await sql`INSERT INTO business (name, position, grade, years) VALUES (${name}, ${position}, ${grade}, ${years})`;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to add sponsor.');
   }
 }
 
@@ -132,4 +153,13 @@ export async function getBusiness() {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch sponsors.');
   }
+}
+
+export async function removeBusiness(name: string, position: string, grade: string, years: string) {
+    try {
+        await sql`DELETE FROM business WHERE name = ${name} AND position = ${position} AND grade = ${grade} AND years = ${years};`;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to remove user.');
+    }
 }

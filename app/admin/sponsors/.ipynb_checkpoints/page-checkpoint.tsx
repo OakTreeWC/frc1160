@@ -69,6 +69,7 @@ export default async function Page() {
                 name="sponsor"
                 className="border-2 border-white p-2 rounded-lg"
                 required
+                autoFocus
               />
               <button
                 type="submit"

@@ -3,9 +3,6 @@ import { auth } from "@/auth";
 
 export default async function Page() {
   const session = await auth()
-  if (!session) {
-      redirect('/api/auth/signin/google');
-  } else {
-      redirect('/admin')
-  }
+  redirect("/api/auth/signin?callbackUrl=/admin");
+  return (<p className="h-screen text-3xl w-full text-center flex justify-center items-center bg-white text-black"><span className="animate-pulse">Signing in...</span></p>); 
 }
