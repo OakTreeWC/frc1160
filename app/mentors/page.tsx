@@ -51,7 +51,7 @@ export default function Page() {
                             <span className="flex flex-row flex-wrap justify-center items-center"><b>Current Occupation :</b>&nbsp;Structural Engineer</span>
                         </span>
                         <span className="text-xl font-light">
-                            biz gotta make a fancy summary. 
+                            As an alumni of the team, Wesley has returned to the team as a mentor. His background is in Civil Engineering, and spent 3 years after college working as a structural engineer. He now works as a substitute teacher at SMUSD while working on obtaining his teaching credential. Wesley has been an active mentor since the 2024 season, Crescendo.
                         </span>
                     </div>
                 </div>

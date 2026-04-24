@@ -3,6 +3,7 @@ import postgres from 'postgres';
 import { revalidatePath } from 'next/cache'; 
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+export { sql };
 
 export async function getSponsors() {
   try {
@@ -58,6 +59,27 @@ export async function getUser(email: string) {
   }
 }
 
+export async function getUsers() {
+  try {
+    // If using a tagged-template SQL helper that accepts parameters inline:
+    const result: any[] = await sql`SELECT * FROM users;`;
+
+    return result
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch user.');
+  }
+}
+
+export async function removeUser(image: string, name: string, email: string) {
+    try {
+        await sql`DELETE FROM users WHERE image = ${image} AND name = ${name} AND email = ${email};`;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to remove user.');
+    }
+}
+
 export async function createInvite(email: string) {
     try {
         await sql`INSERT INTO invites VALUES (${email})`;
@@ -92,17 +114,18 @@ export async function checkInvites(email: string) {
     }
 }
 
-export async function createEngineering(name: string, position: string, grade: string, years: string) {
+export async function createEngineering(name: string, position: string, grade: string, years: string, image: any) {
   try {
       await sql`
         CREATE TABLE IF NOT EXISTS engineering (
           name VARCHAR(100) NOT NULL,
           position VARCHAR(100) NOT NULL,
           grade INT NOT NULL,
-          years INT NOT NULL
+          years INT NOT NULL,
+          image BYTEA
         );
       `;
-      await sql`INSERT INTO engineering (name, position, grade, years) VALUES (${name}, ${position}, ${grade}, ${years})`;
+      await sql`INSERT INTO engineering (name, position, grade, years, image) VALUES (${name}, ${position}, ${grade}, ${years}, ${image})`;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to add sponsor.');
@@ -119,6 +142,15 @@ export async function getEngineering() {
   }
 }
 
+export async function editEngineering(sort:string, name: string, position: string, grade: string, years: string) {
+    try {
+        await sql`UPDATE engineering SET name=${name}, position=${position}, grade=${grade}, years=${years} WHERE sort=${sort}`;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to remove user.');
+    }
+}
+
 export async function removeEngineering(name: string, position: string, grade: string, years: string) {
     try {
         await sql`DELETE FROM engineering WHERE name = ${name} AND position = ${position} AND grade = ${grade} AND years = ${years};`;
@@ -128,17 +160,18 @@ export async function removeEngineering(name: string, position: string, grade: s
     }
 }
 
-export async function createBusiness(name: string, position: string, grade: string, years: string) {
+export async function createBusiness(name: string, position: string, grade: string, years: string, image: any) {
   try {
       await sql`
         CREATE TABLE IF NOT EXISTS business (
           name VARCHAR(100) NOT NULL,
           position VARCHAR(100) NOT NULL,
           grade INT NOT NULL,
-          years INT NOT NULL
+          years INT NOT NULL,
+          image BYTEA
         );
       `;
-      await sql`INSERT INTO business (name, position, grade, years) VALUES (${name}, ${position}, ${grade}, ${years})`;
+      await sql`INSERT INTO business (name, position, grade, years, image) VALUES (${name}, ${position}, ${grade}, ${years}, ${image})`;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to add sponsor.');
@@ -153,6 +186,15 @@ export async function getBusiness() {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch sponsors.');
   }
+}
+
+export async function editBusiness(sort:string, name: string, position: string, grade: string, years: string) {
+    try {
+        await sql`UPDATE business SET name=${name}, position=${position}, grade=${grade}, years=${years} WHERE sort=${sort}`;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to remove user.');
+    }
 }
 
 export async function removeBusiness(name: string, position: string, grade: string, years: string) {

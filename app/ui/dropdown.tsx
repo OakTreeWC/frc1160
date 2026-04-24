@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
+import { useSession, signOut } from "next-auth/react";
 
 export default function Dropdown(
   { links, pathname }: { links: any[]; pathname: string }
@@ -10,6 +11,7 @@ export default function Dropdown(
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
+    const { data: session } = useSession();
     return (
         <div className="relative z-50">
             <div className="relative inline-block w-full h-full text-left">
@@ -27,7 +29,7 @@ export default function Dropdown(
                     <div className="origin-top-right absolute
                                     right-0 mt-8 w-80 rounded-md
                                     shadow-lg bg-white opacity-100 ring-1 ring-black
-                                    ring-opacity-5 focus:outline-none z-[51]">
+                                    ring-opacity-5 focus:outline-none z-[67]">
                         <div className="py-1">
                             {
                                 links.map((link) => {
@@ -43,6 +45,15 @@ export default function Dropdown(
                                     }
                                 )
                             }
+                            <Link
+                                href="/admin"
+                                className={clsx("block px-4 py-4 text-xl text-black opacity-100", {'bg-gray-100':pathname.includes("/admin"),'hover:bg-gray-100':!(pathname.includes("/admin")),'hidden':!session})}
+onClick={toggleDropdown}                                  >
+                                Admin
+                            </Link>
+                            <button onClick={() => signOut({ redirectTo: "/" })} className = {clsx(`block px-4 py-4 text-xl text-black opacity-100 w-full text-left`, {'hidden':!session})}>
+                                Logout
+                            </button>
                         </div>
                     </div>
                 )}

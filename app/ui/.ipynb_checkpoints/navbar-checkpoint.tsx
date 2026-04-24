@@ -23,7 +23,7 @@ export default function NavBar() {
       {"name":"Donate","href":"/donate"},
   ]
   return (
-    <main className = {`flex flex-row space-x-0 justify-left items-center p-0 h-25 absolute inset-0 z-10 bg-white md:bg-white/85 w-full`}>
+    <main className = {`flex flex-row space-x-0 justify-left items-center p-0 h-25 absolute inset-0 z-50 bg-white md:bg-white/85 w-full`}>
         <Link
         className="flex items-center h-full flex-shrink-0 flex-grow-0 bg-white/85"
         href="/"
@@ -57,7 +57,7 @@ export default function NavBar() {
                 className = {clsx(`text-xl flex items-center justify-center align-middle bg-clear text-black`,{"hidden":!session})} 
                 href="/admin"
             >
-                <p className={clsx("transition hover:border-blue-500 border-4 px-2 py-1.5",{'border-blue-500' : pathname === "/admin",'border-transparent': !(pathname === "/admin")},)}>
+                <p className={clsx("transition hover:border-blue-500 border-4 px-2 py-1.5",{'border-blue-500' : pathname.includes("/admin"),'border-transparent': !(pathname.includes("/admin"))},)}>
                     Admin
                 </p>
             </Link>

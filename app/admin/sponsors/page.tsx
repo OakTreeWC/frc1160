@@ -43,7 +43,7 @@ export default async function Page() {
 
   return (
     <main className="text-center md:text-left min-h-screen bg-white">
-      <div className="pt-55 text-black w-full flex flex-col">
+      <div className="pt-19 text-black w-full flex flex-col">
         
         <div className="py-19 px-10 md:px-45 w-full">
             <div className="flex flex-row justify-center flex-wrap">
@@ -82,7 +82,7 @@ export default async function Page() {
         </div>
 
         {/* Sponsors List */}
-        <div className="py-10 px-6 md:px-20 flex justify-center">
+        <div className="pb-10 px-6 md:px-20 flex justify-center">
           <div className="bg-gray-300 p-6 rounded-lg w-full max-w-md space-y-3">
             {sponsors.length === 0 ? (
               <p className="text-center">No sponsors yet</p>
