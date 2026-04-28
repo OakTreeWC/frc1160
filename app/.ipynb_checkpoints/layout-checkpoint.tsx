@@ -7,6 +7,7 @@ import type { Viewport } from 'next';
 import { Analytics } from "@vercel/analytics/next";
 import { Suspense } from 'react';
 import { SessionProvider } from "next-auth/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const sourceSans3 = Source_Sans_3({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Analytics />
+      <SpeedInsights />
       <body
         className={`${sourceSans3.className} antialiased bg-white/85`}
       >
