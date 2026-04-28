@@ -9,35 +9,34 @@ export default function Navbar2() {
       {"name":"Sponsors","href":"/admin/sponsors"},
       {"name":"Engineering","href":"/admin/engineering"},
       {"name":"Business","href":"/admin/business"},
+      {"name":"Mentors","href":"/admin/mentors"},
+      {"name":"Robots","href":"/admin/robots"},
       {"name":"Users","href":"/admin/users"},
       {"name":"Invites", "href":"/admin/invites"},
-      //{"name":"The Overlord", "href":"/cabinet/overlord"}
   ]
   return (
-    <main className = {`flex flex-row space-x-0 justify-left items-center md:p-0 md:h-25 relative top-25 z-10 md:bg-transparent w-full`}>
-
-        
-        
-        <span 
-            className = {`flex flex-wrap flex-row space-x-0 justify-left bg-gray-200 p-0 md:h-25  md:flex w-full justify-center items-center`}  
+    <div className="flex mt-25 z-10 w-full">
+      <div className="flex overflow-x-auto bg-gray-200 h-25 w-full justify-center items-center px-2">
+        {links.map((link) => (
+          <Link
+            key={link.name}
+            className="text-xl flex items-center justify-center p-4 text-black flex-shrink-0"
+            href={link.href}
+          >
+            <p
+              className={clsx(
+                "transition hover:border-blue-500 border-4 px-2 py-1.5",
+                {
+                  "border-blue-500": pathname === link.href,
+                  "border-transparent": pathname !== link.href,
+                }
+              )}
             >
-            {
-                links.map((link)=>{
-                    return (
-                        <Link 
-                            key = {link.name}
-                            className = {`text-xl flex items-center justify-center align-middle p-4 bg-clear text-black`} 
-                            href={link.href}
-                        >
-                            <p className={clsx("transition hover:border-blue-500 border-4 px-2 py-1.5",{'border-blue-500' : pathname === link.href,'border-transparent':pathname !== link.href},)}>
-                                {link.name}
-                            </p>
-                        </Link>
-                    )
-                })
-            }
-        </span>
-        
-    </main>
+              {link.name}
+            </p>
+          </Link>
+        ))}
+      </div>
+    </div>
     )
 }

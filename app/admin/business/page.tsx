@@ -1,11 +1,11 @@
 import { auth } from '@/auth';
-import { getBusiness, createBusiness, editBusiness, removeBusiness, sql } from '@/app/lib/data';
+import { getBusiness, createBusiness, editBusiness, uploadImageBusiness, removeBusiness, sql } from '@/app/lib/data';
 import { revalidatePath } from 'next/cache';
 import Link from 'next/link';
 import Row from './row';
 
 export default async function Page() {
-  const sponsors = await getBusiness();
+  const cabinet = await getBusiness();
     
   async function createCabinet(formData: FormData) {
     'use server';
@@ -49,6 +49,22 @@ export default async function Page() {
     revalidatePath('/admin/business');
     revalidatePath('/cabinet/business');
   }
+
+  async function uploadBusiness(formData: FormData) {
+    "use server";
+
+    const file = formData.get('image') as File;
+    const sort = formData.get('sort') as string;
+      
+    // 1. Convert File to ArrayBuffer, then to Node.js Buffer
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    await uploadImageBusiness(sort,buffer);
+
+    revalidatePath('/admin/business');
+    revalidatePath('/cabinet/business');
+  }
     
   async function deleteCabinet(formData: FormData) {
     'use server';
@@ -73,7 +89,7 @@ export default async function Page() {
 
   return (
     <main className="text-center md:text-left min-h-screen bg-white w-full">
-      <div className="pt-19 text-black w-full flex flex-col">
+      <div className="text-black w-full flex flex-col">
         
         <div className="py-19 px-10 md:px-45 w-full">
             <div className="flex flex-row justify-center flex-wrap">
@@ -132,25 +148,25 @@ export default async function Page() {
 
         {/* Sponsors List */}
         <div className="py-10 mx-2 md:mx-20 flex justify-center items-center bg-gray-300 rounded-lg">
-          {sponsors.length === 0 ? (
+          {cabinet.length === 0 ? (
             <p className="text-center">No Business Cab. Members yet</p>
           ) : (
             <div className="w-full">
               {/* Header Row */}
               <div className="grid grid-cols-12 font-semibold text-center border-b pb-2 px-4 mb-2">
                 <div className="col-span-3">Name</div>
-                <div className="col-span-3">Position</div>
+                <div className="col-span-2">Position</div>
                 <div className="col-span-2">Grade</div>
                 <div className="col-span-2">Years</div>
-                <div className="col-span-2">Action</div>
+                <div className="col-span-3">Action</div>
               </div>
         
               {/* Data Rows */}
               <div className="flex flex-col gap-2">
-                {sponsors.map((sponsor: any) => {       
-                delete sponsor.image;
+                {cabinet.map((cab: any) => {       
+                delete cab.image;
                 return (
-                  <Row key={sponsor.sort} sponsor={sponsor} editCabinet={editCabinet} deleteCabinet={deleteCabinet}/>
+                  <Row key={cab.sort} cab={cab} editCabinet={editCabinet} uploadImage={uploadBusiness} deleteCabinet={deleteCabinet}/>
                 )
                 })}
               </div>

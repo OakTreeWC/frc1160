@@ -6,7 +6,7 @@ export default async function Page() {
   const session = await auth();
   return (
     <main className="text-center md:text-left h-screen ">
-        <div id="cards" className="pt-19 h-full relative text-black w-full flex flex-col opacity-85 bg-white">
+        <div id="cards" className="h-full relative text-black w-full flex flex-col opacity-85 bg-white">
             <div className="py-19 px-10 md:px-45 w-full">
                 <div className="flex flex-row justify-center flex-wrap">
                     <div className="flex flex-col items-center space-y-5">

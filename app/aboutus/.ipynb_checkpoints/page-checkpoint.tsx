@@ -104,16 +104,16 @@ export default function Page() {
                             </span>
                             <div className="flex flex-col h-full">
                                 <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-052.png" width={512} height={380.4770643} className="border-5 border-b-0 border-blue-500 flex-1" alt="Firebird Robotics Logo" />
-                                <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-054.jpg" width={512} height={341} className="border-5 border-blue-500 flex-1" alt="Mr. Scott Barton" />
+                                <Image hidden src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-054.jpg" width={512} height={341} className="border-5 border-blue-500 flex-1" alt="Mr. Scott Barton" />
                                 <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-060.png" width={480} height={240} className="border-5 border-t-0 border-blue-500" alt="Team Members Working" />
                             </div>
                         </span>
                         <span className="text-2xl font-normal px-8 w-full flex flex-col md:flex-row justify-between md:space-x-10 items-center space-y-5 md:space-y-0">
                             <span className="text-4xl font-medium list-disc">2010</span>
                             <span className="md:basis-13/20">
-                                B-roll videos of the team's robots were created and sent to all Los Angeles television stations. Furthermore, the face of a car was found on the side of a freeway. Named Brad, it remains in the robotics room.
+                                B-roll videos of the team's robots were created and sent to all Los Angeles television stations. <span hidden>Furthermore, the face of a car was found on the side of a freeway. Named Brad, it remains in the robotics room.</span>
                             </span>
-                            <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-059.jpg" width={300} height={256.5000001} className="border-5 border-blue-500" alt="Brad" />
+                            <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-054.jpg" width={300} height={256.5000001} className="border-5 border-blue-500" alt="Not Brad" />
                         </span>
                         <span className="text-2xl font-normal px-8 w-full flex flex-col md:flex-row justify-between md:space-x-10 items-center space-y-5 md:space-y-0">
                             <span className="text-4xl font-medium list-disc">2012</span>
@@ -127,7 +127,7 @@ export default function Page() {
                         </span>
                         <span className="text-2xl font-normal px-8 w-full flex flex-col md:flex-row justify-between md:space-x-10 items-center space-y-5 md:space-y-0">
                             <span className="text-4xl font-medium list-disc">2014</span>
-                            <span className="md:basis-13/20">
+                            <span className="md:basis-18/20">
                                 Using our high school's advanced drama students as actors, a 30 second television commercial was shot by the team and played as a PSA.
                             </span>
                             <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-061.jpg" width={807} height={605} className="border-5 border-blue-500 object-fit" alt="PSA Commercial" />

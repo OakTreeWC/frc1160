@@ -28,7 +28,7 @@ export default async function Page() {
 
   return (
     <main className="text-center md:text-left min-h-screen bg-white w-full">
-      <div className="pt-19 text-black w-full flex flex-col">
+      <div className="text-black w-full flex flex-col">
         
         <div className="py-19 px-10 md:px-45 w-full">
             <div className="flex flex-row justify-center flex-wrap">

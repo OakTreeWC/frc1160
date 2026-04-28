@@ -17,11 +17,6 @@ export async function getSponsors() {
 
 export async function addSponsors(sponsors: any[]) {
   try {
-      await sql`
-        CREATE TABLE IF NOT EXISTS sponsors (
-          name VARCHAR(255) NOT NULL
-        );
-      `;
       for (const sponsor of sponsors) {
         await sql`INSERT INTO sponsors VALUES (${sponsor})`;
       }
@@ -116,15 +111,6 @@ export async function checkInvites(email: string) {
 
 export async function createEngineering(name: string, position: string, grade: string, years: string, image: any) {
   try {
-      await sql`
-        CREATE TABLE IF NOT EXISTS engineering (
-          name VARCHAR(100) NOT NULL,
-          position VARCHAR(100) NOT NULL,
-          grade INT NOT NULL,
-          years INT NOT NULL,
-          image BYTEA
-        );
-      `;
       await sql`INSERT INTO engineering (name, position, grade, years, image) VALUES (${name}, ${position}, ${grade}, ${years}, ${image})`;
   } catch (error) {
     console.error('Database Error:', error);
@@ -151,6 +137,15 @@ export async function editEngineering(sort:string, name: string, position: strin
     }
 }
 
+export async function uploadImageEngineering(sort:string, image:any) {
+    try {
+        await sql`UPDATE engineering SET image=${image} WHERE sort=${sort}`;        
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to upload Image.');
+    }
+}
+
 export async function removeEngineering(name: string, position: string, grade: string, years: string) {
     try {
         await sql`DELETE FROM engineering WHERE name = ${name} AND position = ${position} AND grade = ${grade} AND years = ${years};`;
@@ -162,15 +157,6 @@ export async function removeEngineering(name: string, position: string, grade: s
 
 export async function createBusiness(name: string, position: string, grade: string, years: string, image: any) {
   try {
-      await sql`
-        CREATE TABLE IF NOT EXISTS business (
-          name VARCHAR(100) NOT NULL,
-          position VARCHAR(100) NOT NULL,
-          grade INT NOT NULL,
-          years INT NOT NULL,
-          image BYTEA
-        );
-      `;
       await sql`INSERT INTO business (name, position, grade, years, image) VALUES (${name}, ${position}, ${grade}, ${years}, ${image})`;
   } catch (error) {
     console.error('Database Error:', error);
@@ -197,11 +183,89 @@ export async function editBusiness(sort:string, name: string, position: string, 
     }
 }
 
+export async function uploadImageBusiness(sort:string, image:any) {
+    try {
+        await sql`UPDATE business SET image=${image} WHERE sort=${sort}`;        
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to remove user.');
+    }
+}
+
 export async function removeBusiness(name: string, position: string, grade: string, years: string) {
     try {
         await sql`DELETE FROM business WHERE name = ${name} AND position = ${position} AND grade = ${grade} AND years = ${years};`;
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to remove user.');
+    }
+}
+
+export async function createMentors(name: string, position: string, desc: string, years: string, specialty: string, occupation: string, image: any) {
+  try {
+      if (desc) {
+          await sql`INSERT INTO mentors (name, position, description, years, specialty, occupation, image) VALUES (${name}, ${position}, ${desc}, ${years}, ${specialty}, ${occupation}, ${image})`;
+      } else {
+          await sql`INSERT INTO mentors (name, position, years, specialty, occupation, image) VALUES (${name}, ${position}, ${years}, ${specialty}, ${occupation}, ${image})`;
+      }
+      
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to add sponsor.');
+  }
+}
+
+export async function getMentors() {
+  try {
+    const data = await sql`SELECT * FROM mentors ORDER BY sort`;
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch sponsors.');
+  }
+}
+
+export async function editMentors(sort:string, name: string, position: string, desc: string, years: string, specialty: string, occupation: string) {
+    try {
+        if (desc) {
+            await sql`UPDATE mentors SET name=${name}, position=${position}, description=${desc}, years=${years}, specialty=${specialty}, occupation=${occupation} WHERE sort=${sort}`;
+        } else {
+            await sql`UPDATE mentors SET name=${name}, position=${position}, years=${years}, specialty=${specialty}, occupation=${occupation} WHERE sort=${sort}`;
+        }
+        
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to remove user.');
+    }
+}
+
+export async function uploadImageMentors(sort:string, image:any) {
+    try {
+        await sql`UPDATE mentors SET image=${image} WHERE sort=${sort}`;        
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to remove user.');
+    }
+}
+
+export async function removeMentors(name: string, position: string, desc: string, years: string, specialty: string, occupation: string) {
+    try {
+        if (desc) {
+            await sql`DELETE FROM mentors WHERE name = ${name} AND position = ${position} AND description = ${desc} AND years = ${years} AND specialty = ${specialty} AND occupation = ${occupation};`;
+        } else {
+            await sql`DELETE FROM mentors WHERE name = ${name} AND position = ${position} AND years = ${years} AND specialty = ${specialty} AND occupation = ${occupation};`;
+        }
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to remove user.');
+    }
+}
+
+export async function getRobots() {
+    try {
+        await sql`SELECT * FROM robots ORDER BY sort`;   
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to get robots.');
     }
 }

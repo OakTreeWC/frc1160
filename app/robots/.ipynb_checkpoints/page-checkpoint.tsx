@@ -16,8 +16,8 @@ export default function Page() {
                 </div>
                 <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
                 <div className="py-19 px-10 md:px-45 w-full">
-                    <div className="flex flex-row justify-center flex-wrap">
-                        <Link href="/robots/tirex" className="flex flex-col items-center space-y-5 px-8 text-center">
+                    <div className="flex flex-col space-y-7 justify-between">
+                        <div className="flex flex-col items-center space-y-5 px-8 text-center">
                             <span className="text-6xl font-light flex flex-col space-y-2">
                                 [Ti]-Rex
                                 <span className="text-4xl font-normal">
@@ -27,13 +27,16 @@ export default function Page() {
                             <span className="flex justify-center">
                                 <Image src="/robots/tirex/tirex.png" width={635} height={508} alt="Ti-Rex, our 2026 REBUILT Robot" />
                             </span>
-                        </Link>
+                        </div>
+                        <span className="flex justify-center items-center">
+                            <Link href="/robots/tirex" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">More Details</Link>
+                        </span>
                     </div>
                 </div>
                 <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
                 <div className="py-19 px-10 md:px-45 w-full">
-                    <div className="flex flex-row justify-center flex-wrap">
-                        <Link href="/robots/stingray" className="flex flex-col items-center space-y-5 px-8 text-center">
+                    <div className="flex flex-col space-y-7 justify-between">
+                        <div className="flex flex-col items-center space-y-5 px-8 text-center">
                             <span className="text-6xl font-light flex flex-col space-y-2">
                                 S[Ti]ngray
                                 <span className="text-4xl font-normal">
@@ -41,9 +44,12 @@ export default function Page() {
                                 </span>
                             </span>
                             <span className="flex justify-center">
-                                <Image src="/robots/stingray/stingray.jpeg" width={635} height={508} alt="Stingray, our 2025 REEFSCAPE Robot" />
+                                <Image src="/robots/stingray/stingray.jpeg" width={635} height={508} alt="Ti-Rex, our 2026 REBUILT Robot" />
                             </span>
-                        </Link>
+                        </div>
+                        <span className="flex justify-center items-center">
+                            <Link href="/robots/stingray" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">More Details</Link>
+                        </span>
                     </div>
                 </div>
                 <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
