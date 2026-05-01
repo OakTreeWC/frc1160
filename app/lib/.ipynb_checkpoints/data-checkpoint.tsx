@@ -263,9 +263,108 @@ export async function removeMentors(name: string, position: string, desc: string
 
 export async function getRobots() {
     try {
-        await sql`SELECT * FROM robots ORDER BY sort`;   
+        const data = await sql`SELECT sort, slug, resources, season, description, photos, competitions, name FROM robots ORDER BY sort`;  
+        return data;
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to get robots.');
+    }
+}
+
+export async function getRobot(robot: string) {
+    try {
+        const data = await sql`SELECT sort, slug, resources, season, description, photos, competitions, name FROM robots WHERE slug=${robot}`;  
+        return data?.[0] ?? null;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to get robots.');
+    }
+}
+
+export async function updateRobot(slug: string, name: string, desc: string) {
+    try {
+        await sql`UPDATE robots SET name=${name}, description=${desc} WHERE slug=${slug}`;   
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to get robots.');
+    }
+}
+
+export async function uploadThumbnailRobots(slug:string, url:string) {
+    try {
+        const data = await sql`SELECT photos FROM robots WHERE slug=${slug}`;
+        let photos = data[0].photos;
+        photos.thumbnail = url;
+        await sql`UPDATE robots SET photos=${photos} WHERE slug=${slug}`;       
+        await revalidatePath(`/admin/robots/${slug}`);
+        await revalidatePath(`/robots/${slug}`);
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to update thumbnail.');
+    }
+}
+
+export async function addCompetitionRobots(slug:string, key:string) {
+    try {
+        const data = await sql`SELECT competitions FROM robots WHERE slug=${slug}`;
+        let competitions = data[0].competitions;
+        if (competitions.includes(key)) {
+            throw new Error('Competition already exists for this robot.');
+        }
+        competitions.push(key);
+        await sql`UPDATE robots SET competitions=${competitions} WHERE slug=${slug}`;       
+        await revalidatePath(`/admin/robots/${slug}`);
+        await revalidatePath(`/robots/${slug}`);
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to add competition.');
+    }
+}
+
+export async function deleteCompetitionRobots(slug:string, key:string) {
+    try {
+        const data = await sql`SELECT competitions FROM robots WHERE slug=${slug}`;
+        let competitions = data[0].competitions;
+        if (!competitions.includes(key)) {
+            throw new Error('Competition does not exist for this robot.');
+        }
+        competitions = competitions.filter((comp: string) => comp !== key);
+        await sql`UPDATE robots SET competitions=${competitions} WHERE slug=${slug}`;       
+        await revalidatePath(`/admin/robots/${slug}`);
+        await revalidatePath(`/robots/${slug}`);
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to delete competition.');
+    }
+}
+
+export async function addResourceRobots(slug: string, url: string, text: string) {
+    try {        
+        const data = await sql`SELECT resources FROM robots WHERE slug=${slug}`;
+        let resources = data[0].resources;
+        if (Object.values(resources).includes(url)) {
+            throw new Error('Resource with this URL already exists for this robot.');
+        }
+        resources[text] = url;
+        await sql`UPDATE robots SET resources=${resources} WHERE slug=${slug}`;       
+        await revalidatePath(`/admin/robots/${slug}`);
+        await revalidatePath(`/robots/${slug}`);
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to add resource.');
+    }
+}
+
+export async function deleteResourceRobots(slug: string, url: string) {
+    try {
+        const data = await sql`SELECT resources FROM robots WHERE slug=${slug}`;
+        let resources = data[0].resources;
+        delete resources[Object.keys(resources).find(key => resources[key] === url)!];
+        await sql`UPDATE robots SET resources=${resources} WHERE slug=${slug}`;       
+        await revalidatePath(`/admin/robots/${slug}`);
+        await revalidatePath(`/robots/${slug}`);
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to delete resource.');
     }
 }
