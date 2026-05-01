@@ -1,5 +1,5 @@
 import { auth } from '@/auth';
-import { getRobots, updateRobots } from '@/app/lib/data';
+import { getRobots } from '@/app/lib/data';
 import { revalidatePath } from 'next/cache';
 import Link from 'next/link';
 import Image from 'next/image';
