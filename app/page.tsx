@@ -22,7 +22,7 @@ export default async function Page() {
                 <div className="flex flex-col space-y-3 md:flex-row md:space-y-8 flex-wrap justify-center items-start">
                     <div className="flex flex-col md:basis-1/2 items-center space-y-5 pr-5">
                         <Image src="/homepage/FIRST.svg" width={150} height={150} alt="FIRST Logo" />
-                        <span className="text-6xl font-light flex flex-col space-y-1">
+                        <span className="text-6xl font-light text-center flex flex-col space-y-1">
                             <span>
                                 Team 1160 is a FIRST® FRC Team
                             </span>
