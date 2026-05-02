@@ -297,7 +297,7 @@ export async function addRobot(name: string, thumbnail: string, seasonName: stri
         const image = {
             "thumbnail": thumbnail
         };
-        await sql`INSERT INTO robots (name, slug, photos, seasonname) VALUES (${name}, ${slug}, ${image}, ${seasonName})`;
+        await sql`INSERT INTO robots (name, slug, photos, seasonname) VALUES (${name}, ${slug}, ${sql.json(image)}, ${seasonName})`;
         return slug;
     } catch (error) {
         console.error('Database Error:', error);
