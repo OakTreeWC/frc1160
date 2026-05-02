@@ -263,7 +263,7 @@ export async function removeMentors(name: string, position: string, desc: string
 
 export async function getRobots() {
     try {
-        const data = await sql`SELECT sort, slug, resources, season, description, photos, competitions, name FROM robots ORDER BY sort`;  
+        const data = await sql`SELECT sort, slug, resources, season, description, photos, competitions, name, published FROM robots ORDER BY sort`;  
         return data;
     } catch (error) {
         console.error('Database Error:', error);
@@ -273,7 +273,7 @@ export async function getRobots() {
 
 export async function getRobot(robot: string) {
     try {
-        const data = await sql`SELECT sort, slug, resources, season, description, photos, competitions, name FROM robots WHERE slug=${robot}`;  
+        const data = await sql`SELECT sort, slug, resources, season, description, photos, competitions, name, published FROM robots WHERE slug=${robot}`;  
         return data?.[0] ?? null;
     } catch (error) {
         console.error('Database Error:', error);
@@ -366,5 +366,16 @@ export async function deleteResourceRobots(slug: string, url: string) {
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to delete resource.');
+    }
+}
+
+export async function setPublishedRobot(slug: string, published: boolean) {
+    try {
+        await sql`UPDATE robots SET published=${published} WHERE slug=${slug}`;   
+        await revalidatePath(`/admin/robots/${slug}`);
+        await revalidatePath(`/robots/${slug}`);
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to update robot publication status.');
     }
 }

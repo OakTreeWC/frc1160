@@ -1,4 +1,4 @@
-import { getRobot, uploadThumbnailRobots, addCompetitionRobots, deleteCompetitionRobots, addResourceRobots, deleteResourceRobots, updateRobot } from '@/app/lib/data'
+import { getRobot, uploadThumbnailRobots, addCompetitionRobots, deleteCompetitionRobots, addResourceRobots, deleteResourceRobots, updateRobot, setPublishedRobot } from '@/app/lib/data'
 import { revalidatePath } from 'next/cache'
 import Robot from './robot'
 
@@ -156,6 +156,6 @@ export default async function Page({ params }) {
     }
     
     return (
-        <Robot robot={robot} editRobot={editRobot} changeThumbnail={changeThumbnail} addComp={addComp} deleteComp={deleteComp} addResource={addResource} deleteResource={deleteResource} compData={compData} reloadCompetitions={reloadCompetitions} />
+        <Robot robot={robot} editRobot={editRobot} changeThumbnail={changeThumbnail} addComp={addComp} deleteComp={deleteComp} addResource={addResource} deleteResource={deleteResource} compData={compData} setPublishedRobot={setPublishedRobot} reloadCompetitions={reloadCompetitions} />
     )
 }

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {RemoveScroll} from 'react-remove-scroll';
 
-export default function Robot({ robot, editRobot, changeThumbnail, addComp, deleteComp, reloadCompetitions, addResource, deleteResource, compData }) {
+export default function Robot({ robot, editRobot, changeThumbnail, addComp, deleteComp, reloadCompetitions, addResource, deleteResource, setPublishedRobot, compData }) {
     const nameRef = useRef(null);
     const descRef = useRef(null);
 
@@ -24,12 +24,16 @@ export default function Robot({ robot, editRobot, changeThumbnail, addComp, dele
         setPhoto(false);
         changeThumbnail(formData);
     }
-    
+    console.log(robot)
     return (
-        <div className="relative text-black w-full flex flex-col text-center opacity-100 bg-white">
+        <div className="relative text-black w-full flex flex-col text-center opacity-100 bg-white/85">
             <div className="w-full px-10 py-5 flex flex-row justify-center space-x-10 items-center" >
                     <button onClick={() => submitEdits()} className="bg-indigo-500 p-5 py-2 rounded-xl text-white font-normal hover:cursor-pointer hover:bg-indigo-600 transition ease-in-out" >Save</button>
-                    <button className="bg-indigo-500 p-5 py-2 rounded-xl text-white font-normal hover:cursor-pointer hover:bg-indigo-600 transition ease-in-out" >Publish</button>
+                    { !robot.published ? (
+                        <button onClick={() => setPublishedRobot(robot.slug, true)} className="bg-indigo-500 p-5 py-2 rounded-xl text-white font-normal hover:cursor-pointer hover:bg-indigo-600 transition ease-in-out" >Publish</button>
+                    ) : (
+                        <button onClick={() => setPublishedRobot(robot.slug, false)} className="bg-indigo-500 p-5 py-2 rounded-xl text-white font-normal hover:cursor-pointer hover:bg-indigo-600 transition ease-in-out" >Un-Publish</button>
+                    )}
                 </div>
             <div className="pb-19 px-10 md:px-45 w-full">
                 <div className="flex flex-row justify-center flex-wrap">
@@ -75,27 +79,6 @@ export default function Robot({ robot, editRobot, changeThumbnail, addComp, dele
                             })
                                 
                             }
-                            <span hidden className="text-xl font-light flex flex-col justify-center text-center space-y-1">
-                                <span className="text-3xl font-medium">CA District Ventura County Event</span>
-                                <span className="text-2xl font-medium pb-1">March 13 to March 15, 2026</span>
-                                <span>Team 1160 was Rank 10 with a record of 8-7-0</span>
-                                <span className="text-2xl font-normal">Awards</span>
-                                <span>Imagery Award in honor of Jack Kamen</span>
-                            </span>
-                            <span hidden className="text-xl font-light flex flex-col justify-center text-center space-y-1">
-                                <span className="text-3xl font-medium">CA District San Gabriel Valley Event</span>
-                                <span className="text-2xl font-medium pb-1">March 27 to March 29, 2026</span>
-                                <span>Team 1160 was Rank 6 with a record of 10-6-0</span>
-                                <span className="text-2xl font-normal">Awards</span>
-                                <span>Creativity Award sponsored by Rockwell Automation</span>
-                            </span>
-                            <span hidden className="text-2xl font-light flex flex-col justify-center text-center space-y-1">
-                                <span className="text-3xl font-medium">FIRST California Southern State Championship</span>
-                                <span className="text-2xl font-medium pb-1">April 9 to April 12, 2026</span>
-                                <span>Team 1160 was Rank 41 with a record of 5-7-0</span>
-                                <span className="text-2xl font-normal">Awards</span>
-                                <span>Team Sustainability Award sponsored by Dow</span>
-                            </span>
                         </span>
                     </div>
                 </div>
