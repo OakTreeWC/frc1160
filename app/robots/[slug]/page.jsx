@@ -7,7 +7,7 @@ export default async function Page({ params }) {
     const { slug } = await params;
     const robot = await getRobot(slug);
 
-    if (!robot.published) {
+    if (!robot?.published || false) {
         return notFound();
     }
 
@@ -41,7 +41,9 @@ export default async function Page({ params }) {
             const eventdata = await event.json();
             const statusdata = await status.json();
             const awardsdata = await awards.json();
-
+            if (awardsdata.length === 0) {
+                awardsdata.push({name: "None"});
+            }
             const convertDate = (dateStr) => {
                 const [year, month, day] = dateStr.split('-').map(Number);
                 
@@ -73,7 +75,7 @@ export default async function Page({ params }) {
     }
 
     const compData = [];
-    for (const comp of robot.competitions) {
+    for (const comp of robot.competitions || []) {
         const data = await fetchCompData(comp);
         if (data) {
             compData.push(data);
@@ -85,11 +87,14 @@ export default async function Page({ params }) {
             <div className="py-19 px-10 md:px-45 w-full">
                 <div className="flex flex-row justify-center flex-wrap">
                     <div className="flex flex-col items-center space-y-10 px-8 text-center">
-                        <span className="text-6xl font-light text-center flex flex-col space-y-1">{robot.name}</span>
+                        <div>
+                            <span className="text-6xl font-light text-center flex flex-col space-y-1">{robot.name}</span>
+                            <span className="text-4xl font-normal">{robot.seasonname || ""}</span>
+                        </div>
                         <span className="flex flex-row space-x-5 items-center justify-center">
                             <Image src={robot.photos.thumbnail} width={800} height={600} alt={robot.name} />
                         </span>
-                        <span className="text-xl text-center font-light w-[67%]">{robot.description}</span>
+                        <span className="text-xl text-center font-light w-[67%]">{robot.description || ""}</span>
                     </div>
                 </div>
             </div>
@@ -129,7 +134,7 @@ export default async function Page({ params }) {
                                 Resources
                             </span>
                         </span>
-                        {Object.entries(robot.resources).map(([key, value]) => (
+                        {Object.entries(robot.resources || {}).map(([key, value]) => (
                             <div key={value} className="flex justify-center opacity-100">
                                 <Link href={value} className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">{key}</Link>
                             </div>

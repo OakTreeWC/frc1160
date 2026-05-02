@@ -263,7 +263,17 @@ export async function removeMentors(name: string, position: string, desc: string
 
 export async function getRobots() {
     try {
-        const data = await sql`SELECT sort, slug, resources, season, description, photos, competitions, name, published FROM robots ORDER BY sort`;  
+        const data = await sql`SELECT sort, slug, resources, seasonname, description, photos, competitions, name, published FROM robots ORDER BY sort DESC`;
+        return data.filter((robot) => robot.published);
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to get robots.');
+    }
+}
+
+export async function getAllRobots() {
+    try {
+        const data = await sql`SELECT sort, slug, resources, seasonname, description, photos, competitions, name, published FROM robots ORDER BY sort DESC`;
         return data;
     } catch (error) {
         console.error('Database Error:', error);
@@ -273,7 +283,7 @@ export async function getRobots() {
 
 export async function getRobot(robot: string) {
     try {
-        const data = await sql`SELECT sort, slug, resources, season, description, photos, competitions, name, published FROM robots WHERE slug=${robot}`;  
+        const data = await sql`SELECT sort, slug, resources, seasonname, description, photos, competitions, name, published FROM robots WHERE slug=${robot}`;  
         return data?.[0] ?? null;
     } catch (error) {
         console.error('Database Error:', error);
@@ -281,9 +291,23 @@ export async function getRobot(robot: string) {
     }
 }
 
-export async function updateRobot(slug: string, name: string, desc: string) {
+export async function addRobot(name: string, thumbnail: string, seasonName: string) {
     try {
-        await sql`UPDATE robots SET name=${name}, description=${desc} WHERE slug=${slug}`;   
+        const slug = name.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+        const image = {
+            "thumbnail": thumbnail
+        };
+        await sql`INSERT INTO robots (name, slug, photos, seasonname) VALUES (${name}, ${slug}, ${image}, ${seasonName})`;
+        return slug;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to get robots.');
+    }
+}
+
+export async function updateRobot(slug: string, name: string, desc: string, seasonName: string) {
+    try {
+        await sql`UPDATE robots SET name=${name}, description=${desc}, seasonname=${seasonName} WHERE slug=${slug}`;   
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to get robots.');
@@ -307,7 +331,7 @@ export async function uploadThumbnailRobots(slug:string, url:string) {
 export async function addCompetitionRobots(slug:string, key:string) {
     try {
         const data = await sql`SELECT competitions FROM robots WHERE slug=${slug}`;
-        let competitions = data[0].competitions;
+        let competitions = data[0].competitions || [];
         if (competitions.includes(key)) {
             throw new Error('Competition already exists for this robot.');
         }
@@ -341,8 +365,8 @@ export async function deleteCompetitionRobots(slug:string, key:string) {
 export async function addResourceRobots(slug: string, url: string, text: string) {
     try {        
         const data = await sql`SELECT resources FROM robots WHERE slug=${slug}`;
-        let resources = data[0].resources;
-        if (Object.values(resources).includes(url)) {
+        let resources = data[0].resources || {};
+        if (Object.values(resources || {}).includes(url)) {
             throw new Error('Resource with this URL already exists for this robot.');
         }
         resources[text] = url;
@@ -374,6 +398,7 @@ export async function setPublishedRobot(slug: string, published: boolean) {
         await sql`UPDATE robots SET published=${published} WHERE slug=${slug}`;   
         await revalidatePath(`/admin/robots/${slug}`);
         await revalidatePath(`/robots/${slug}`);
+        await revalidatePath(`/robots`);
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to update robot publication status.');

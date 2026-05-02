@@ -42,7 +42,7 @@ export default function RootLayout({
       <Analytics />
       <SpeedInsights />
       <body
-        className={`${sourceSans3.className} antialiased bg-white/85`}
+        className={`${sourceSans3.className} antialiased bg-black min-h-screen`}
       >
         <SessionProvider>
             <NavBar />

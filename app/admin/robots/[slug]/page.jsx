@@ -1,10 +1,12 @@
 import { getRobot, uploadThumbnailRobots, addCompetitionRobots, deleteCompetitionRobots, addResourceRobots, deleteResourceRobots, updateRobot, setPublishedRobot } from '@/app/lib/data'
 import { revalidatePath } from 'next/cache'
 import Robot from './robot'
+import { notFound } from 'next/navigation';
 
 export default async function Page({ params }) {
     const { slug } = await params;
     const robot = await getRobot(slug);
+    if (!robot) {return notFound()};
 
     async function getGoogleDriveId(url) {
         "use server"
@@ -73,9 +75,9 @@ export default async function Page({ params }) {
         }
     }
 
-    async function editRobot(slug, name, desc) {
+    async function editRobot(slug, name, desc, seasonName) {
         "use server"
-        await updateRobot(slug, name, desc);
+        await updateRobot(slug, name, desc, seasonName);
         await revalidatePath(`/robots/${slug}`);
         await revalidatePath(`/admin/robots/${slug}`)
     }
@@ -116,7 +118,9 @@ export default async function Page({ params }) {
             const eventdata = await event.json();
             const statusdata = await status.json();
             const awardsdata = await awards.json();
-
+            if (awardsdata.length === 0) {
+                awardsdata.push({name: "None"});
+            }
             const convertDate = (dateStr) => {
                 const [year, month, day] = dateStr.split('-').map(Number);
                 
@@ -148,7 +152,7 @@ export default async function Page({ params }) {
     }
 
     const compData = [];
-    for (const comp of robot.competitions) {
+    for (const comp of robot.competitions || []) {
         const data = await fetchCompData(comp);
         if (data) {
             compData.push(data);
