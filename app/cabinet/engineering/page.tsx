@@ -11,7 +11,7 @@ export default async function Page() {
   return (
     <main className="text-center md:text-left">
         <Navbar2 />
-        <div id="cards" className="pt-50 relative text-black w-full flex flex-col opacity-85 bg-white space-y-7">
+        <div id="cards" className="relative text-black w-full flex flex-col opacity-85 bg-white space-y-7">
             <div className="py-10 md:py-19 px-10 md:px-45 w-full">
                 <div className="flex flex-row justify-center flex-wrap">
                     <div className="flex flex-col items-center space-y-5">
@@ -26,10 +26,12 @@ export default async function Page() {
                 {
                     engineering.map((member)=>{
                         if (bg===0) {bg=1} else {bg=0}
+                        const base64Image = member.image?.toString('base64');
+                        const dataUrl = `data:image/png;base64,${base64Image}`;
                         return (
                             <div key={member.name} className={clsx(`flex flex-col space-y-7 md:space-y-0 md:flex-row flex-wrap justify-center py-7 px-10 w-full md:px-0`,{'bg-[#a9c4e6]/67 md:bg-inherit':bg===1})}>
                                 <div className="flex flex-col md:basis-1/3 items-center justify-center space-y-5">
-                                    <Image src={"/cabinet/engineering/"+member.name.toLowerCase().replace(/\s+/g, '')+".jpg"} width={410} height={615} loading="eager" alt={member.name}></Image>
+                                    <Image src={dataUrl} alt={member.name} width={410} height={615} />
                                 </div>
                                 <div className="flex flex-col md:basis-2/3 items-left pl-8 space-y-2">
                                     <span className="text-5xl font-light flex flex-col space-y-1">

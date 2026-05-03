@@ -6,8 +6,12 @@ import TiLogo from '@/app/ui/TiLogo';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import Dropdown from '@/app/ui/dropdown';
+import { signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react"
+
 
 export default function NavBar() {
+  const { data: session } = useSession();
   const pathname = usePathname();
   const links = [
       {"name":"Home","href":"/"},
@@ -15,12 +19,11 @@ export default function NavBar() {
       {"name":"Mentors","href":"/mentors"},
       {"name":"Cabinet","href":"/cabinet/engineering", "alt":"/cabinet/business"},
       {"name":"Robots","href":"/robots"},
-      {"name":"Resources","href":"/resources"},
       {"name":"Donate","href":"/donate"},
-      {"name":"Login","href":"https://admin.wchen.dev"},
+      {"name":"Resources","href":"/resources"},
   ]
   return (
-    <main className = {`flex flex-row space-x-0 justify-left items-center p-0 h-25 absolute inset-0 z-10 bg-white md:bg-white/85 w-full`}>
+    <main className = {`flex flex-row space-x-0 justify-left items-center p-0 h-25 relative inset-0 z-50 bg-white md:bg-white/85 w-full`}>
         <Link
         className="flex items-center h-full flex-shrink-0 flex-grow-0 bg-white/85"
         href="/"
@@ -33,7 +36,7 @@ export default function NavBar() {
             />
         
         <span 
-            className = {`flex flex-row space-x-8 justify-left bg-white/85 p-0 pr-7 h-25 hidden md:flex w-full overflow-x-auto`}  
+            className = {`flex flex-row space-x-8 justify-left bg-white/85 p-0 pl-2 pr-7 h-25 hidden md:flex w-full overflow-x-auto`}  
             >
             {
                 links.map((link)=>{
@@ -50,6 +53,25 @@ export default function NavBar() {
                     )
                 })
             }
+            <Link 
+                className = {clsx(`text-xl flex items-center justify-center align-middle bg-clear text-black`,{"hidden":!session || session?.user?.role === "admin"})} 
+                href="/dashboard"
+            >
+                <p className={clsx("transition hover:border-blue-500 border-4 px-2 py-1.5",{'border-blue-500' : pathname.includes("/dashboard"),'border-transparent': !(pathname.includes("/dashboard"))},)}>
+                    Dashboard
+                </p>
+            </Link>
+            <Link 
+                className = {clsx(`text-xl flex items-center justify-center align-middle bg-clear text-black`,{"hidden":session?.user?.role !== "admin"})} 
+                href="/admin"
+            >
+                <p className={clsx("transition hover:border-blue-500 border-4 px-2 py-1.5",{'border-blue-500' : pathname.includes("/admin"),'border-transparent': !(pathname.includes("/admin"))},)}>
+                    Admin
+                </p>
+            </Link>
+            <button onClick={() => signOut({ redirectTo: "/" })} className = {clsx(`text-xl flex items-center justify-center align-middle bg-clear text-black`, {'hidden':!session})}><p className={"transition border-transparent hover:border-blue-500 border-4 px-2 py-1.5 hover:cursor-pointer"}>
+                Logout
+            </p></button>
         </span>
 
         <div className="md:hidden w-11 h-11">

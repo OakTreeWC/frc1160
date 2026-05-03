@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function Page() {
   return (
     <main className="text-center md:text-left">
-        <div id="cards" className="pt-30 relative text-black w-full flex flex-col opacity-85 bg-white">
+        <div id="cards" className="relative text-black w-full flex flex-col opacity-85 bg-white">
             <div className="pb-19 md:py-19 px-10 md:px-45 w-full">
                 <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 justify-center flex-wrap">
                     <div className="flex flex-col md:basis-1/5 items-center justify-center text-center space-y-3 font-light text-xl pt-10 md:pt-0">
@@ -104,30 +104,30 @@ export default function Page() {
                             </span>
                             <div className="flex flex-col h-full">
                                 <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-052.png" width={512} height={380.4770643} className="border-5 border-b-0 border-blue-500 flex-1" alt="Firebird Robotics Logo" />
-                                <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-054.jpg" width={512} height={341} className="border-5 border-blue-500 flex-1" alt="Mr. Scott Barton" />
+                                <Image hidden src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-054.jpg" width={512} height={341} className="border-5 border-blue-500 flex-1" alt="Mr. Scott Barton" />
                                 <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-060.png" width={480} height={240} className="border-5 border-t-0 border-blue-500" alt="Team Members Working" />
                             </div>
                         </span>
                         <span className="text-2xl font-normal px-8 w-full flex flex-col md:flex-row justify-between md:space-x-10 items-center space-y-5 md:space-y-0">
                             <span className="text-4xl font-medium list-disc">2010</span>
                             <span className="md:basis-13/20">
-                                B-roll videos of the team's robots were created and sent to all Los Angeles television stations. Furthermore, the face of a car was found on the side of a freeway. Named Brad, it remains in the robotics room.
+                                B-roll videos of the team's robots were created and sent to all Los Angeles television stations. <span hidden>Furthermore, the face of a car was found on the side of a freeway. Named Brad, it remains in the robotics room.</span>
                             </span>
-                            <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-059.jpg" width={300} height={256.5000001} className="border-5 border-blue-500" alt="Brad" />
+                            <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-054.jpg" width={300} height={256.5000001} className="border-5 border-blue-500" alt="Not Brad" />
                         </span>
                         <span className="text-2xl font-normal px-8 w-full flex flex-col md:flex-row justify-between md:space-x-10 items-center space-y-5 md:space-y-0">
                             <span className="text-4xl font-medium list-disc">2012</span>
                             <span className="md:basis-13/20 flex flex-col space-y-7">
                                 Feeling disconnected with our school and community and wanting a more modern and professional identity, we combined Team Titanium and Firebird Robotics to rebrand into Titanium Robotics
                             </span>
-                            <div className="flex flex-col flex-1">
+                            <div className="flex flex-col justify-center items-end flex-1">
                                 <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-058.png" width={443} height={209} className="border-5 border-b-0 border-blue-500 flex-1" alt="Titanium Robotics Logo but with a Firebird" />
                                 <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-057.png" width={435} height={272} className="border-5 border-blue-500 flex-1" alt="trash can" />
                             </div>
                         </span>
                         <span className="text-2xl font-normal px-8 w-full flex flex-col md:flex-row justify-between md:space-x-10 items-center space-y-5 md:space-y-0">
                             <span className="text-4xl font-medium list-disc">2014</span>
-                            <span className="md:basis-13/20">
+                            <span className="md:basis-18/20">
                                 Using our high school's advanced drama students as actors, a 30 second television commercial was shot by the team and played as a PSA.
                             </span>
                             <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-061.jpg" width={807} height={605} className="border-5 border-blue-500 object-fit" alt="PSA Commercial" />
