@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function Page() {
   return (
     <main className="text-center md:text-left">
-        <div id="cards" className="pt-30 relative text-black w-full flex flex-col opacity-85 bg-white">
+        <div id="cards" className="relative text-black w-full flex flex-col opacity-85 bg-white">
             <div className="pb-19 md:py-19 px-10 md:px-45 w-full">
                 <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 justify-center flex-wrap">
                     <div className="flex flex-col md:basis-1/5 items-center justify-center text-center space-y-3 font-light text-xl pt-10 md:pt-0">
@@ -120,7 +120,7 @@ export default function Page() {
                             <span className="md:basis-13/20 flex flex-col space-y-7">
                                 Feeling disconnected with our school and community and wanting a more modern and professional identity, we combined Team Titanium and Firebird Robotics to rebrand into Titanium Robotics
                             </span>
-                            <div className="flex flex-col flex-1">
+                            <div className="flex flex-col justify-center items-end flex-1">
                                 <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-058.png" width={443} height={209} className="border-5 border-b-0 border-blue-500 flex-1" alt="Titanium Robotics Logo but with a Firebird" />
                                 <Image src="/timeline/Titanium Robotics Sponsorship Packet.pdf-image-057.png" width={435} height={272} className="border-5 border-blue-500 flex-1" alt="trash can" />
                             </div>

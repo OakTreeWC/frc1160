@@ -46,8 +46,14 @@ export default function Dropdown(
                                 )
                             }
                             <Link
+                                href="/dashboard"
+                                className={clsx("block px-4 py-4 text-xl text-black opacity-100", {'bg-gray-100':pathname.includes("/dashboard"),'hover:bg-gray-100':!(pathname.includes("/dashboard")),'hidden':(session?.user?.role === "admin" || !session)})}
+onClick={toggleDropdown}                                  >
+                                Dashboard
+                            </Link>
+                            <Link
                                 href="/admin"
-                                className={clsx("block px-4 py-4 text-xl text-black opacity-100", {'bg-gray-100':pathname.includes("/admin"),'hover:bg-gray-100':!(pathname.includes("/admin")),'hidden':!session})}
+                                className={clsx("block px-4 py-4 text-xl text-black opacity-100", {'bg-gray-100':pathname.includes("/admin"),'hover:bg-gray-100':!(pathname.includes("/admin")),'hidden':session?.user?.role !== "admin"})}
 onClick={toggleDropdown}                                  >
                                 Admin
                             </Link>

@@ -11,7 +11,21 @@ export const { handlers, auth, signIn, signOut } = NextAuth(() => {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL })
   return {
     adapter: NeonAdapter(pool),
-    providers: [Google],
+    providers: [
+        Google(
+            {
+                profile(profile) {
+                    return {
+                        id: profile.sub,
+                        email: profile.email,
+                        name: profile.name,
+                        image: profile.picture,
+                        role: "member",
+                    };
+                }
+            }
+        )
+    ],
     callbacks: {
         async signIn({ user, profile }) {
             const email = profile?.email || user?.email;
@@ -29,6 +43,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth(() => {
                 return true
             } else { return false }
         },
+        session({ session, user }) {
+            session.user.role = user.role; // Add role to session
+            return session;
+        }   
     },
     pages: {
         error: "/error",

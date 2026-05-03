@@ -105,7 +105,6 @@ export default async function Page() {
                 {/* Data Rows */}
                 {
                     robots.map((robot: any) => {
-                        console.log(robot);
                         return (
                             <div key={robot.slug} className="grid grid-cols-12 text-2xl font-normal text-center items-center justify-center pb-2 px-10 mb-2">
                                 <Image src={robot.photos.thumbnail} width={800} height={400} alt={robot.photos.thumbnail} className="col-span-2" />

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";
+// @ts-ignore: CSS module declaration is handled by Next.js
 import "./globals.css";
 import NavBar from '@/app/ui/navbar';
 import Link from 'next/link';

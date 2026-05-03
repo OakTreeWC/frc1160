@@ -11,7 +11,7 @@ export default async function Page() {
   return (
     <main className="text-center md:text-left">
         <Navbar2 />
-        <div id="cards" className="pt-50 relative text-black w-full flex flex-col opacity-85 bg-white space-y-7">
+        <div id="cards" className="relative text-black w-full flex flex-col opacity-85 bg-white space-y-7">
             <div className="py-10 md:py-19 px-10 md:px-45 w-full">
                 <div className="flex flex-row justify-center flex-wrap">
                     <div className="flex flex-col items-center space-y-5">

@@ -3,4 +3,5 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --animate-spin: spin 0.7s ease 1;
 }

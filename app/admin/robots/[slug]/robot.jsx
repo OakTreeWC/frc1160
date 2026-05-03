@@ -28,7 +28,6 @@ export default function Robot({ robot, editRobot, changeThumbnail, addComp, dele
         setPhoto(false);
         changeThumbnail(formData);
     }
-    console.log(robot)
     return (
         <div className="relative text-black w-full flex flex-col text-center opacity-100 bg-white/85">
             <div className="w-full px-10 py-5 flex flex-row justify-center space-x-10 items-center" >

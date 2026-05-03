@@ -40,6 +40,34 @@ export async function removeSponsor(sponsor: string) {
   }
 }
 
+export async function getRealSponsors() {
+  try {
+    const data = await sql`SELECT * FROM realsponsors`;
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch sponsors.');
+  }
+}
+
+export async function createSponsorFR(name: string, image: any) {
+  try {
+      await sql`INSERT INTO realsponsors (name, image) VALUES (${name}, ${image})`;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to add sponsor.');
+  }
+}
+
+export async function deleteSponsorFR(name: string) {
+  try {
+      await sql`DELETE FROM realsponsors WHERE name = ${name}`;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to delete sponsor.');
+  }
+}
+
 export async function getUser(email: string) {
   try {
     // If using a tagged-template SQL helper that accepts parameters inline:
@@ -47,6 +75,34 @@ export async function getUser(email: string) {
 
     if (result[0]) {
         return true
+    } else { return false }
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch user.');
+  }
+}
+
+export async function getUserById(id: string) {
+  try {
+    // If using a tagged-template SQL helper that accepts parameters inline:
+    const result: any[] = await sql`SELECT name, image, role FROM users WHERE id = ${id} LIMIT 1;`;
+
+    if (result[0]) {
+        return result[0]
+    } else { return false }
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch user.');
+  }
+}
+
+export async function getUserNameById(id: string) {
+  try {
+    // If using a tagged-template SQL helper that accepts parameters inline:
+    const result: any[] = await sql`SELECT name FROM users WHERE id = ${id} LIMIT 1;`;
+
+    if (result[0]) {
+        return result[0].name
     } else { return false }
   } catch (error) {
     console.error('Database Error:', error);
@@ -402,5 +458,14 @@ export async function setPublishedRobot(slug: string, published: boolean) {
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to update robot publication status.');
+    }
+}
+
+export async function updateUser(email: string, name: string, field: string) {
+    try {
+        await sql`UPDATE users SET name=${name}, role=${field} WHERE email=${email}`;   
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to update user.');
     }
 }

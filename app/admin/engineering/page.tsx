@@ -1,7 +1,6 @@
 import { auth } from '@/auth';
 import { getEngineering, createEngineering, editEngineering, uploadImageEngineering, removeEngineering, sql } from '@/app/lib/data';
 import { revalidatePath } from 'next/cache';
-import Link from 'next/link';
 import Row from './row';
 
 export default async function Page() {

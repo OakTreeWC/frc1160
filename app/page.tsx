@@ -1,21 +1,20 @@
 import Image from "next/image";
 import Link from 'next/link';
-import { getSponsors } from '@/app/lib/data';
+import { getSponsors, getRealSponsors } from '@/app/lib/data';
+import { head, list } from "@vercel/blob";
+import { blob } from "stream/consumers";
 
 export default async function Page() {
   let sponsors = await getSponsors();
-
-  const files = ['1boeing.svg','2northropgrumman.png','3nasa.svg','4rgsport.webp','5disney-employee-matching-gifts.webp']
-  const path = require("path");
-  const images = files.filter((file: string) => {
-    return ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp'].includes(path.extname(file).toLowerCase());
-  });
+  const realsponsors = await getRealSponsors()
+  const blobs = await list();
+  const url = blobs.blobs.find((b: { pathname: string; url: string }) => b.pathname.includes('herophoto'))?.url || '/homepage/homepage.jpg';
 
   return (
     <main className="text-center md:text-left">
         
         <div className="z-0 w-full md:h-screen block" >
-            <Image src="/homepage/homepage.jpg" height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-scale-down md:object-cover w-full mt-25 md:mt-0 md:top-0 md:h-full overflow-hidden bg-center md:fixed filter brightness-80 block" />
+            <Image src={url} height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-scale-down md:object-cover w-full mt-0 top-0 md:h-full overflow-hidden bg-center md:fixed filter brightness-80 block" />
         </div>
         <div id="cards" className="pt-10 md:pt-0 relative top-0 md:top-full text-black w-full flex flex-col opacity-100 bg-white/85">
             <div className="md:py-20 px-10 md:px-[10vw] w-full">
@@ -83,14 +82,16 @@ export default async function Page() {
                     <div className="items-center font-light items-stretch">
                         <div className="flex flex-col md:flex-row flex-wrap pt-8 md:p-8 md:space-x-8 space-y-8 justify-center items-center">
                             {
-                                images.map((image: string) => {
+                                realsponsors.map((sponsor: any) => {
+                                    const base64Image = sponsor.image?.toString('base64');
+                                    const dataUrl = `data:image/png;base64,${base64Image}`;
                                     return (
                                       <Image
-                                        key={image}
-                                        src={`/sponsors/${image}`}
+                                        key={sponsor.name}
+                                        src={dataUrl}
                                         width={300}
                                         height={150}
-                                        alt={image}
+                                        alt={sponsor.name}
                                         className="object-contain"
                                       />
 );
