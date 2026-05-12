@@ -1,35 +1,12 @@
-import { getRobot, uploadThumbnailRobots, addCompetitionRobots, deleteCompetitionRobots, addResourceRobots, deleteResourceRobots, updateRobot } from '@/app/lib/data'
+import { getRobot, removeRobot, addCompetitionRobots, deleteCompetitionRobots, addResourceRobots, deleteResourceRobots, updateRobot, setPublishedRobot } from '@/app/lib/data'
 import { revalidatePath } from 'next/cache'
 import Robot from './robot'
+import { notFound, redirect } from 'next/navigation';
 
 export default async function Page({ params }) {
     const { slug } = await params;
     const robot = await getRobot(slug);
-
-    async function getGoogleDriveId(url) {
-        "use server"
-        // Check if url is missing or not a string
-        if (!url || typeof url !== 'string') {
-            console.error("No URL provided to getGoogleDriveId");
-            return null;
-        }
-    
-        const regex = /(?:\/d\/|id=)([\w-]+)/;
-        const match = url.match(regex);
-        return match ? match[1] : null;
-    }
-
-    
-    async function changeThumbnail(formData) {
-        "use server"
-        const url = formData.get("photo");
-        /*https://drive.google.com/file/d/1lscqznkk0X6T1zcH3jvRUXxu2hCiclX2/view?usp=drive_link*/
-        const id = await getGoogleDriveId(url);
-        if (!id) return;
-        const photo = `https://drive.usercontent.google.com/download?id=${id}&export=view&authuser=0`
-        /*https://drive.usercontent.google.com/download?id=1QBvA0QSX9SKtHtM6v9cpEUqIppIhP6zk&export=view&authuser=0*/
-        await uploadThumbnailRobots(robot.slug, photo);
-    }
+    if (!robot) {return notFound()};
 
     async function addComp(formData) {
         "use server"
@@ -73,11 +50,28 @@ export default async function Page({ params }) {
         }
     }
 
-    async function editRobot(slug, name, desc) {
+    async function editRobot(slug, name, desc, seasonName) {
         "use server"
-        await updateRobot(slug, name, desc);
+        await updateRobot(slug, name, desc, seasonName);
         await revalidatePath(`/robots/${slug}`);
         await revalidatePath(`/admin/robots/${slug}`)
+    }
+
+    async function reloadCompetitions() {
+        "use server"
+        await revalidatePath(`/robots/${robot.slug}`);
+        await revalidatePath(`/admin/robots/${robot.slug}`)
+    }
+
+    async function deleteRobot(formData) {
+        "use server"
+        if (formData.get("slug") === robot.slug) {
+            console.log("deleting robot",robot.slug);
+            removeRobot(robot.slug);
+            revalidatePath("/robots");
+            revalidatePath("/admin/robots");
+            redirect("/admin/robots");
+        }
     }
 
     async function fetchCompData(eventKey) {
@@ -110,9 +104,11 @@ export default async function Page({ params }) {
             const eventdata = await event.json();
             const statusdata = await status.json();
             const awardsdata = await awards.json();
-
+            if (awardsdata.length === 0) {
+                awardsdata.push({name: "None"});
+            }
             const convertDate = (dateStr) => {
-                const [month, day, year] = dateStr.split('-').map(Number);
+                const [year, month, day] = dateStr.split('-').map(Number);
                 
                 // JavaScript months are 0-indexed (January is 0)
                 const date = new Date(year, month - 1, day);
@@ -128,20 +124,31 @@ export default async function Page({ params }) {
                                       ', ' + date.getFullYear();
                 return formattedDate;
             }
+
+            if (!statusdata?.qual) return null;
+            
             const data = {
                 name: eventdata.name,
-                dates: `${convertDate(eventdata.start_date)} to ${convertDate(eventdata.end_date)}`
+                dates: `${convertDate(eventdata.start_date)} to ${convertDate(eventdata.end_date)}`,
+                status: `Team 1160 was Rank ${statusdata.qual.ranking.rank} with a record of ${statusdata.qual.ranking.record.wins+(statusdata.playoff?.record.wins || 0)}-${statusdata.qual.ranking.record.losses+statusdata.playoff?.record.losses || 0}-${statusdata.qual.ranking.record.ties+statusdata.playoff?.record.ties || 0}`,
+                awards: awardsdata.map(award => award.name)
             }
-            console.log(data);
             return data;
         } catch (error) {
-            return
+            console.error("Error fetching competition data:", error);
+            return null;
         }
     }
 
-    fetchCompData("2026caven")
+    const compData = [];
+    for (const comp of robot.competitions || []) {
+        const data = await fetchCompData(comp);
+        if (data) {
+            compData.push(data);
+        }
+    }
     
     return (
-        <Robot robot={robot} editRobot={editRobot} changeThumbnail={changeThumbnail} addComp={addComp} deleteComp={deleteComp} addResource={addResource} deleteResource={deleteResource} fetchCompData={fetchCompData} />
+        <Robot robot={robot} editRobot={editRobot} addComp={addComp} deleteComp={deleteComp} addResource={addResource} deleteResource={deleteResource} compData={compData} setPublishedRobot={setPublishedRobot} reloadCompetitions={reloadCompetitions} deleteRobot={deleteRobot} slug={slug} />
     )
 }

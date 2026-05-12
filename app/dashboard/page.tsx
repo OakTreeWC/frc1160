@@ -16,7 +16,7 @@ export default async function Page() {
         const field = formData.get("field") as string;
 
         if (!name || !field) return;
-        const allowedFields = ["mechanical", "electrical", "cad", "programming", "engineering", "business"];
+        const allowedFields = ["mechanical", "electrical", "cad", "programming", "business"];
         if (!allowedFields.includes(field)) return; 
 
 
@@ -27,7 +27,7 @@ export default async function Page() {
         "use server";
         const task = formData.get("task") as string;
         const note = formData.get("note") as string;
-        const fields = ["mechanical", "electrical", "cad", "programming", "engineering", "business"].filter((field) => formData.get(field) === field);
+        const fields = ["mechanical", "electrical", "cad", "programming", "business"].filter((field) => formData.get(field) === field);
         if (!task) return;
         await addTodo(session?.user?.id || "", task, note, fields);
         return

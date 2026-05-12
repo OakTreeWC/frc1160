@@ -25,7 +25,6 @@ export default function UpdateUserForm({ action, defaultName, defaultRole }) {
                 <option value="electrical" className="bg-gray-600">Electrical</option>
                 <option value="cad" className="bg-gray-600">CAD</option>
                 <option value="programming" className="bg-gray-600">Programming</option>
-                <option value="engineering" className="bg-gray-600">Engineering</option>
                 <option value="business" className="bg-gray-600">Business</option>
             </select>
             <button

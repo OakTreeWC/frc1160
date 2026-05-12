@@ -7,19 +7,6 @@ import Image from 'next/image';
 export default async function Page() {
     const robots = await getAllRobots();
 
-    async function getGoogleDriveId(url: string) {
-        "use server"
-        // Check if url is missing or not a string
-        if (!url || typeof url !== 'string') {
-            console.error("No URL provided to getGoogleDriveId");
-            return null;
-        }
-    
-        const regex = /(?:\/d\/|id=)([\w-]+)/;
-        const match = url.match(regex);
-        return match ? match[1] : null;
-    }
-
     async function createRobot(formData: FormData) {
         'use server';
     
@@ -29,15 +16,11 @@ export default async function Page() {
         }
     
         const name = formData.get("name") as string;
-        let thumbnail = formData.get("thumbnail") as string;
-        const id = await getGoogleDriveId(thumbnail);
-        if (!id) return;
-        thumbnail = `https://drive.usercontent.google.com/download?id=${id}&export=view&authuser=0`
         const seasonName = formData.get("seasonname") as string;
     
-        if (!name || !thumbnail || !seasonName ) return;
+        if (!name || !seasonName ) return;
     
-        await addRobot(name, thumbnail, seasonName);
+        await addRobot(name, seasonName);
     
         await revalidatePath('/admin/robots');
     }
@@ -69,16 +52,6 @@ export default async function Page() {
                 name="name"
                 className="border-2 border-white p-2 rounded-lg"
                 required
-              />
-              <input
-                placeholder="GDrive Thumbnail URL"
-                name="thumbnail"
-                className="border-2 border-gray-400 p-2 rounded-lg"
-                type="url"
-                pattern="(https://drive.google.com/file/d/).*"
-                size={40}
-                required
-                autoFocus
               />
               <input
                 placeholder="Season Name"

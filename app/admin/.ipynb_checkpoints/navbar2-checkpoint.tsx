@@ -6,7 +6,9 @@ import Link from 'next/link';
 export default function Navbar2() {
   const pathname = usePathname();
   const links = [
+      {"name":"Photos","href":"/admin/photos"},
       {"name":"Sponsors","href":"/admin/sponsors"},
+      {"name":"Resources","href":"/admin/resources"},
       {"name":"Engineering","href":"/admin/engineering"},
       {"name":"Business","href":"/admin/business"},
       {"name":"Mentors","href":"/admin/mentors"},
@@ -15,7 +17,7 @@ export default function Navbar2() {
       {"name":"Invites", "href":"/admin/invites"},
   ]
   return (
-    <div className="flex mt-25 z-10 w-full">
+    <div className="flex z-10 w-full">
       <div className="flex overflow-x-auto bg-gray-200 h-25 w-full justify-center items-center px-2">
         {links.map((link) => (
           <Link

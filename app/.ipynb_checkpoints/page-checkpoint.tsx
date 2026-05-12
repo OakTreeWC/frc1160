@@ -1,21 +1,20 @@
 import Image from "next/image";
 import Link from 'next/link';
-import { getSponsors } from '@/app/lib/data';
+import { getSponsors, getRealSponsors, getPublicPhoto } from '@/app/lib/data';
+import { head, list } from "@vercel/blob";
+import { blob } from "stream/consumers";
 
 export default async function Page() {
   let sponsors = await getSponsors();
-
-  const files = ['1boeing.svg','2northropgrumman.png','3nasa.svg','4rgsport.webp','5disney-employee-matching-gifts.webp']
-  const path = require("path");
-  const images = files.filter((file: string) => {
-    return ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp'].includes(path.extname(file).toLowerCase());
-  });
+  const realsponsors = await getRealSponsors()
+  const herophoto = await getPublicPhoto('homepage/herophoto') || '/homepage/homepage.jpg';
+  const yippee = await getPublicPhoto('homepage/yippee') || "/homepage/yippee.jpg";
 
   return (
-    <main className="text-center md:text-left">
+    <main className="text-center md:text-left flex flex-col">
         
         <div className="z-0 w-full md:h-screen block" >
-            <Image src="/homepage/homepage.jpg" height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-scale-down md:object-cover w-full mt-25 md:mt-0 md:top-0 md:h-full overflow-hidden bg-center md:fixed filter brightness-80 block" />
+            <Image src={herophoto} height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-scale-down md:object-cover w-full mt-0 top-0 md:h-full overflow-hidden bg-center md:fixed filter brightness-80 block" />
         </div>
         <div id="cards" className="pt-10 md:pt-0 relative top-0 md:top-full text-black w-full flex flex-col opacity-100 bg-white/85">
             <div className="md:py-20 px-10 md:px-[10vw] w-full">
@@ -53,16 +52,16 @@ export default async function Page() {
                             Team 1160 is located in San Marino, CA.
                         </span>
                         <span className="text-xl font-light">
-                            Our team is located in San Marino, California and is a part of San Marino High School. We work with teachers and students along with professionals around the area to provide a high quality STEM (and FIRST ®) experience.
+                            Our team is located in San Marino, California and is a part of San Marino High School. We work with teachers and students along with professionals around the area to provide a high quality STEM (and FIRST®) experience.
                         </span>
                     </div>
                 </div>
             </div>
             <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
-            <div className="py-20 px-10 md:px-45 w-full">
+            <div className="py-20 px-10 md:px-[10vw] w-full">
                 <div className="flex flex-col w-full md:w-auto md:flex-row flex-wrap">
                     <span className="md:basis-1/2 items-center">
-                        <Image src="/homepage/yippee.jpg" width={1000} height={665} alt="yippe" />
+                        <Image src={yippee} width={1000} height={665} alt="yippe" />
                     </span>
                     <div className="md:basis-1/2 md:pl-7 pt-4 md:pt-0 text-xl font-light">
                         Titanium Robotics is an FRC team with roughly 50 members, mostly from San Marino High School in San Marino, CA, although some members are from surrounding schools and areas such as South Pasadena and Arcadia.
@@ -77,20 +76,22 @@ export default async function Page() {
                 </div>
             </div>
             <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
-            <div className="py-20 px-10 md:px-45 w-full">
+            <div className="py-20 px-10 md:px-[10vw] w-full">
                 <div className="flex flex-col items-center">
                     <span className="items-center text-5xl font-light pb-6 text-center">Titanium Sponsors</span>
                     <div className="items-center font-light items-stretch">
                         <div className="flex flex-col md:flex-row flex-wrap pt-8 md:p-8 md:space-x-8 space-y-8 justify-center items-center">
                             {
-                                images.map((image: string) => {
+                                realsponsors.map((sponsor: any) => {
+                                    const base64Image = sponsor.image?.toString('base64');
+                                    const dataUrl = `data:image/png;base64,${base64Image}`;
                                     return (
                                       <Image
-                                        key={image}
-                                        src={`/sponsors/${image}`}
+                                        key={sponsor.name}
+                                        src={dataUrl}
                                         width={300}
                                         height={150}
-                                        alt={image}
+                                        alt={sponsor.name}
                                         className="object-contain"
                                       />
 );

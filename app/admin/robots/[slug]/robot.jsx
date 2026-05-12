@@ -2,14 +2,17 @@
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import {RemoveScroll} from 'react-remove-scroll';
+import { RemoveScroll } from 'react-remove-scroll';
 
-export default function Robot({ robot, editRobot, changeThumbnail, addComp, deleteComp, reloadCompetitions, addResource, deleteResource, setPublishedRobot, compData }) {
+export default function Robot({ robot, editRobot, addComp, deleteComp, reloadCompetitions, addResource, deleteResource, setPublishedRobot, compData, slug, deleteRobot }) {
     const nameRef = useRef(null);
     const descRef = useRef(null);
     const seasonRef = useRef(null);
 
+    const [ thumbnail, setThumbnail ] = useState(robot.photos.thumbnail);
+
     const [ photo, setPhoto ] = useState(false);
+    const [ deleteModal, setDeleteModal ] = useState(false);
     const [ comp, setComp ] = useState(false);
     const [ resources, setResources ] = useState(false);
     
@@ -28,15 +31,48 @@ export default function Robot({ robot, editRobot, changeThumbnail, addComp, dele
         setPhoto(false);
         changeThumbnail(formData);
     }
+
+    async function changeThumbnail(formData) {
+        const file = formData.get("photo");
+        const response = await fetch('/api/data/robots/upload', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              fileName: file.name,
+              fileType: file.type,
+              slug: slug
+            }),
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.message || 'Error generating URL.');
+        }
+        
+        // Upload file to S3
+        await fetch(data.url, {
+            method: 'PUT',
+            body: file,
+            headers: {
+              'Content-Type': file.type,
+            },
+        });
+        setThumbnail(data.publicUrl);
+    }
+    
     return (
         <div className="relative text-black w-full flex flex-col text-center opacity-100 bg-white/85">
-            <div className="w-full px-10 py-5 flex flex-row justify-center space-x-10 items-center" >
-                    <button onClick={() => submitEdits()} className="bg-indigo-500 p-5 py-2 rounded-xl text-white font-normal hover:cursor-pointer hover:bg-indigo-600 transition ease-in-out" >Save</button>
+            <div className="w-full px-10 py-5 flex flex-row justify-center space-x-5 items-center" >
+                    <button onClick={() => setDeleteModal(true)} className="bg-red-500 p-5 py-2 rounded-xl text-white font-normal hover:cursor-pointer hover:bg-red-600 transition ease-in-out" >Delete</button>
                     { !robot.published ? (
                         <button onClick={() => setPublishedRobot(robot.slug, true)} className="bg-indigo-500 p-5 py-2 rounded-xl text-white font-normal hover:cursor-pointer hover:bg-indigo-600 transition ease-in-out" >Publish</button>
                     ) : (
                         <button onClick={() => setPublishedRobot(robot.slug, false)} className="bg-indigo-500 p-5 py-2 rounded-xl text-white font-normal hover:cursor-pointer hover:bg-indigo-600 transition ease-in-out" >Un-Publish</button>
                     )}
+                    <button onClick={() => submitEdits()} className="bg-indigo-500 p-5 py-2 rounded-xl text-white font-normal hover:cursor-pointer hover:bg-indigo-600 transition ease-in-out" >Save</button>
                 </div>
             <div className="pb-19 px-10 md:px-45 w-full">
                 <div className="flex flex-row justify-center flex-wrap">
@@ -46,8 +82,8 @@ export default function Robot({ robot, editRobot, changeThumbnail, addComp, dele
                             <span ref={seasonRef} contentEditable suppressContentEditableWarning className="text-4xl font-normal">{robot.seasonname || 'Season Name'}</span>
                         </div>
                         <span className="flex flex-row space-x-5 items-center justify-center">
-                            <span className="w-10" />
-                            <Image src={robot.photos.thumbnail} width={800} height={600} alt={robot.name} />
+                            <span className="w-14" />
+                            <Image src={thumbnail} width={800} height={600} alt={robot.name} />
                             <button onClick={() => setPhoto(true)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="h-10 w-10 p-2 hover:cursor-pointer hover:fill-white transition hover:bg-blue-500/40 duration-300 ease-out rounded-xl">{/* Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc. */}<path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L368 46.1 465.9 144 490.3 119.6c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L432 177.9 334.1 80 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"/></svg>
                             </button>
@@ -119,16 +155,11 @@ export default function Robot({ robot, editRobot, changeThumbnail, addComp, dele
                             </button>
                         </span>
                         <form action={changeThumb} className="flex flex-row space-x-5 justify-center items-center">
-                           <label htmlFor="photo">Must be a Google Drive URL (Image must be set to public)</label>
                            <input
-                                placeholder="URL"
                                 name="photo"
                                 className="border-2 border-gray-400 p-2 rounded-lg"
-                                type="url"
-                                pattern="(https://drive.google.com/file/d/).*"
-                                size={40}
+                                type="file"
                                 required
-                                autoFocus
                               />
                             <button
                                 type="submit"
@@ -244,6 +275,36 @@ export default function Robot({ robot, editRobot, changeThumbnail, addComp, dele
                                 </div>
                             ))}
                         </div>
+                    </div>
+                </div>
+            </RemoveScroll>
+            )}
+            { deleteModal && (
+            <RemoveScroll>
+                <div className="fixed flex justify-center bg-black/35 items-center top-0 left-0 w-full h-screen">
+                    <div className="bg-white md:w-200 m-10 p-7 text-black rounded-2xl flex flex-col justify-center items-center space-y-7 text-center">
+                        <span className="flex flex-row justify-end items-center w-full">
+                            <button onClick={() => setDeleteModal(false)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" className="h-10 w-10 p-2 hover:cursor-pointer hover:fill-white transition hover:bg-blue-500/40 duration-300 ease-out rounded-xl">{/*!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc. */}<path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/></svg>
+                            </button>
+                        </span>
+                        <form action={deleteRobot} className="flex flex-row space-x-5 text-3xl font-medium justify-center items-center">
+                            <label>Type <b>"{slug}"</b> to delete.</label>
+                            <input
+                                placeholder={slug}
+                                name="slug"
+                                className="border-2 border-gray-400 p-2 rounded-lg"
+                                type="text"
+                                size={10}
+                                required
+                            />
+                            <button
+                                type="submit"
+                                className="border-2 border-white text-white rounded-lg px-4 py-2 transition bg-red-400 duration-500 hover:bg-red-600 hover:cursor-pointer"
+                            >
+                                DELETE
+                            </button>
+                        </form>
                     </div>
                 </div>
             </RemoveScroll>

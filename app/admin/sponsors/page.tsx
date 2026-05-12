@@ -104,7 +104,7 @@ export default async function Page() {
         <div className="py-10 px-6 md:px-20 flex justify-center">
           <div className="bg-gray-300 p-6 rounded-lg">
             <form
-              action={createRealSponsor}
+              action={createSponsor}
               className="flex flex-col md:flex-row gap-4 items-center"
             >
               <input

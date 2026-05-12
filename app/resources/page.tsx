@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from 'next/link';
+import { getResources } from '@/app/lib/data';
 
-export default function Page() {
+export default async function Page() {
+    const resources = await getResources();
   return (
-    <main className="h-screen">
-        <div id="cards" className="relative text-black w-full h-full flex flex-col opacity-85 bg-white">
+    <>
+        <div id="cards" className="relative text-black w-full flex flex-1 flex-col opacity-85 bg-white">
             <div className="py-19 px-10 md:px-45 w-full">
                     <div className="flex flex-row justify-center flex-wrap">
                         <div className="flex flex-col items-center space-y-5 px-8 text-center">
@@ -18,16 +20,17 @@ export default function Page() {
             <div className="py-19 px-10 md:px-45 w-full">
                 <div className="flex flex-row flex-wrap justify-center">
                     <div className="flex flex-col items-center space-y-7">
-                        <div className="flex justify-center opacity-100">
-                            <Link href="/resources/brand" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Brand Book</Link>
-                        </div>
-                        <div className="flex justify-center opacity-100">
-                            <Link href="/resources/sponsorpacket.pdf" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Sponsorship Packet</Link>
-                        </div>
+                        {
+                            resources.map((resource) => (
+                                <div key={resource.id} className="flex justify-center opacity-100">
+                                    <Link href={resource.url} className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">{resource.name}</Link>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </>
   );
 }

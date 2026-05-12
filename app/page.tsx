@@ -1,27 +1,27 @@
 import Image from "next/image";
 import Link from 'next/link';
-import { getSponsors, getRealSponsors } from '@/app/lib/data';
+import { getSponsors, getRealSponsors, getPublicPhoto } from '@/app/lib/data';
 import { head, list } from "@vercel/blob";
 import { blob } from "stream/consumers";
 
 export default async function Page() {
   let sponsors = await getSponsors();
   const realsponsors = await getRealSponsors()
-  const blobs = await list();
-  const url = blobs.blobs.find((b: { pathname: string; url: string }) => b.pathname.includes('herophoto'))?.url || '/homepage/homepage.jpg';
+  const herophoto = await getPublicPhoto('homepage/herophoto') || '/homepage/homepage.jpg';
+  const yippee = await getPublicPhoto('homepage/yippee') || "/homepage/yippee.jpg";
 
   return (
-    <main className="text-center md:text-left">
+    <main className="text-center md:text-left flex flex-col">
         
         <div className="z-0 w-full md:h-screen block" >
-            <Image src={url} height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-scale-down md:object-cover w-full mt-0 top-0 md:h-full overflow-hidden bg-center md:fixed filter brightness-80 block" />
+            <Image src={herophoto} height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-scale-down md:object-cover w-full mt-0 top-0 md:h-full overflow-hidden bg-center md:fixed filter brightness-80 block" />
         </div>
         <div id="cards" className="pt-10 md:pt-0 relative top-0 md:top-full text-black w-full flex flex-col opacity-100 bg-white/85">
             <div className="md:py-20 px-10 md:px-[10vw] w-full">
                 <div className="flex flex-col space-y-3 md:flex-row md:space-y-8 flex-wrap justify-center items-start">
                     <div className="flex flex-col md:basis-1/2 items-center space-y-5 pr-5">
                         <Image src="/homepage/FIRST.svg" width={150} height={150} alt="FIRST Logo" />
-                        <span className="text-6xl font-light text-center flex flex-col space-y-1">
+                        <span className="text-6xl font-light flex flex-col space-y-1">
                             <span>
                                 Team 1160 is a FIRST® FRC Team
                             </span>
@@ -52,16 +52,16 @@ export default async function Page() {
                             Team 1160 is located in San Marino, CA.
                         </span>
                         <span className="text-xl font-light">
-                            Our team is located in San Marino, California and is a part of San Marino High School. We work with teachers and students along with professionals around the area to provide a high quality STEM (and FIRST ®) experience.
+                            Our team is located in San Marino, California and is a part of San Marino High School. We work with teachers and students along with professionals around the area to provide a high quality STEM (and FIRST®) experience.
                         </span>
                     </div>
                 </div>
             </div>
             <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
-            <div className="py-20 px-10 md:px-45 w-full">
+            <div className="py-20 px-10 md:px-[10vw] w-full">
                 <div className="flex flex-col w-full md:w-auto md:flex-row flex-wrap">
                     <span className="md:basis-1/2 items-center">
-                        <Image src="/homepage/yippee.jpg" width={1000} height={665} alt="yippe" />
+                        <Image src={yippee} width={1000} height={665} alt="yippe" />
                     </span>
                     <div className="md:basis-1/2 md:pl-7 pt-4 md:pt-0 text-xl font-light">
                         Titanium Robotics is an FRC team with roughly 50 members, mostly from San Marino High School in San Marino, CA, although some members are from surrounding schools and areas such as South Pasadena and Arcadia.
@@ -76,7 +76,7 @@ export default async function Page() {
                 </div>
             </div>
             <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
-            <div className="py-20 px-10 md:px-45 w-full">
+            <div className="py-20 px-10 md:px-[10vw] w-full">
                 <div className="flex flex-col items-center">
                     <span className="items-center text-5xl font-light pb-6 text-center">Titanium Sponsors</span>
                     <div className="items-center font-light items-stretch">

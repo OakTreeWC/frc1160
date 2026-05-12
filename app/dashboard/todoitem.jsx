@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { updateTodoStatus } from "./data"
 
 
-export default function ToDoItem({id, deleteTodoItem, removeWorkerTodoItem, acceptTodoItem, dismissTodoItem, updateTodoStatus, getComments, createComment, date, time, task, tasknote, creator, serverstatus, worker, self}) {
+export default function ToDoItem({id, deleteTodoItem, removeWorkerTodoItem, acceptTodoItem, dismissTodoItem, updateTodoStatus, getComments, createComment, date, time, task, tasknote, creator, serverstatus, worker, self, reload}) {
     if (!date || !time || !task || !creator) {console.log("Invalid todo item"); return;}
     const [status, setStatusfr] = useState(serverstatus);
     if (status>2) setStatusfr(2);
@@ -19,7 +19,8 @@ export default function ToDoItem({id, deleteTodoItem, removeWorkerTodoItem, acce
             await acceptTodoItem(id);
         }
         setStatusfr(newStatus);
-        await updateTodoStatus(id, newStatus);   
+        await updateTodoStatus(id, newStatus);
+        await reload();
     }
     
     const [ comments, setComments ] = useState([]);

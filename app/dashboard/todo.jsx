@@ -52,6 +52,11 @@ export default function ToDo({userId, createTodo, deleteTodo, acceptTodo, remove
         setClientTodos(todos);
     }
 
+    async function reload() {
+        const todos = await getAllTodo();
+        setClientTodos(todos);
+    }
+
     return (
     <>
         <div className="col-span-3 bg-purple-500/10 rounded-2xl border-purple-500/20 border-2 w-full h-full min-h-80 max-h-[75vh] overflow-y-auto text-white text-center p-6" >
@@ -107,6 +112,7 @@ export default function ToDo({userId, createTodo, deleteTodo, acceptTodo, remove
                         getComments={getComments}
                         createComment={createComment}
                         self={self}
+                        reload={reload}
                         />
                     )
                 })
@@ -115,7 +121,7 @@ export default function ToDo({userId, createTodo, deleteTodo, acceptTodo, remove
         {
             todo && (
                 <RemoveScroll>
-                <div className="fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center" onClick={() => setTodo(false)}>
+                <div className="fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center z-50" onClick={() => setTodo(false)}>
                     <div className="bg-gray-900 p-10 rounded-2xl border-gray-500/30 border-2 w-full max-w-md text-white" onClick={(e) => e.stopPropagation()}>
                         <span className="text-2xl font-bold mb-5 block text-center">Add To-Do Item</span>
                         <form action={createTodoItem} className="flex flex-col placeholder:text-gray-400 gap-5">
@@ -125,7 +131,7 @@ export default function ToDo({userId, createTodo, deleteTodo, acceptTodo, remove
                                 <span className="text-xl">Field*</span>
                             </label>
                             {
-                                ["mechanical", "electrical", "cad", "programming", "engineering", "business"].map((field) => (
+                                ["mechanical", "electrical", "cad", "programming", "business"].map((field) => (
                                     <span key={field} className="flex flex-row justify-between px-8">
                                         <label htmlFor={field} className="flex items-center gap-2 justify-start">{field.charAt(0).toUpperCase() + field.slice(1)}</label>
                                         <input type="checkbox" name={field} value={field} id={field}></input>
@@ -136,7 +142,7 @@ export default function ToDo({userId, createTodo, deleteTodo, acceptTodo, remove
                             <button type="submit" className="p-3 bg-blue-500/25 hover:bg-blue-500/90 transition duration-300 ease-out rounded-xl text-white font-bold">Add Task</button>
                         </form>
                     </div>
-                </div>
+                </div>  
                 </RemoveScroll>
             )
         }

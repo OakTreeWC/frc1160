@@ -5,6 +5,54 @@ import { revalidatePath } from 'next/cache';
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 export { sql };
 
+export async function getResources() {
+  try {
+    const data = await sql`SELECT * FROM resources`;
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch sponsors.');
+  }
+}
+
+export async function addResource(name: string, url: string) {
+  try {
+    await sql`INSERT INTO resources (name, url) VALUES (${name}, ${url})`;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to add resource.');
+  }
+}
+
+export async function removeResource(id: string) {
+  try {
+      await sql`DELETE FROM resources WHERE id=${id}`;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to delete resource.');
+  }
+}
+
+export async function getPublicPhoto(key: string) {
+    try {
+        const data = await sql`SELECT * FROM photos WHERE key=${key}`;
+        return data[0]?.url;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch photo.');
+    }
+}
+
+export async function editPublicPhoto(key: string, value: string) {
+    try {
+        console.log(key, value);
+        await sql`UPDATE photos SET url=${value} WHERE key=${key}`
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to edit photo.');
+    }
+}
+
 export async function getSponsors() {
   try {
     const data = await sql`SELECT * FROM sponsors`;
@@ -347,11 +395,20 @@ export async function getRobot(robot: string) {
     }
 }
 
-export async function addRobot(name: string, thumbnail: string, seasonName: string) {
+export async function removeRobot(slug: string) {
+    try {
+        await sql`DELETE FROM robots WHERE slug=${slug}`;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to delete robot.');
+    }
+}
+
+export async function addRobot(name: string, seasonName: string) {
     try {
         const slug = name.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
         const image = {
-            "thumbnail": thumbnail
+            "thumbnail": "https://placehold.co/800x600.png"
         };
         await sql`INSERT INTO robots (name, slug, photos, seasonname) VALUES (${name}, ${slug}, ${sql.json(image)}, ${seasonName})`;
         return slug;
@@ -370,7 +427,7 @@ export async function updateRobot(slug: string, name: string, desc: string, seas
     }
 }
 
-export async function uploadThumbnailRobots(slug:string, url:string) {
+export async function updateThumbnailRobots(slug:string, url:string) {
     try {
         const data = await sql`SELECT photos FROM robots WHERE slug=${slug}`;
         let photos = data[0].photos;

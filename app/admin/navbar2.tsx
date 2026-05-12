@@ -6,8 +6,9 @@ import Link from 'next/link';
 export default function Navbar2() {
   const pathname = usePathname();
   const links = [
-      {"name":"Homepage","href":"/admin/herophoto"},
+      {"name":"Photos","href":"/admin/photos"},
       {"name":"Sponsors","href":"/admin/sponsors"},
+      {"name":"Resources","href":"/admin/resources"},
       {"name":"Engineering","href":"/admin/engineering"},
       {"name":"Business","href":"/admin/business"},
       {"name":"Mentors","href":"/admin/mentors"},

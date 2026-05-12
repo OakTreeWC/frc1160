@@ -1,37 +1,12 @@
-import { getRobot, uploadThumbnailRobots, addCompetitionRobots, deleteCompetitionRobots, addResourceRobots, deleteResourceRobots, updateRobot, setPublishedRobot } from '@/app/lib/data'
+import { getRobot, removeRobot, addCompetitionRobots, deleteCompetitionRobots, addResourceRobots, deleteResourceRobots, updateRobot, setPublishedRobot } from '@/app/lib/data'
 import { revalidatePath } from 'next/cache'
 import Robot from './robot'
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 export default async function Page({ params }) {
     const { slug } = await params;
     const robot = await getRobot(slug);
     if (!robot) {return notFound()};
-
-    async function getGoogleDriveId(url) {
-        "use server"
-        // Check if url is missing or not a string
-        if (!url || typeof url !== 'string') {
-            console.error("No URL provided to getGoogleDriveId");
-            return null;
-        }
-    
-        const regex = /(?:\/d\/|id=)([\w-]+)/;
-        const match = url.match(regex);
-        return match ? match[1] : null;
-    }
-
-    
-    async function changeThumbnail(formData) {
-        "use server"
-        const url = formData.get("photo");
-        /*https://drive.google.com/file/d/1lscqznkk0X6T1zcH3jvRUXxu2hCiclX2/view?usp=drive_link*/
-        const id = await getGoogleDriveId(url);
-        if (!id) return;
-        const photo = `https://drive.usercontent.google.com/download?id=${id}&export=view&authuser=0`
-        /*https://drive.usercontent.google.com/download?id=1QBvA0QSX9SKtHtM6v9cpEUqIppIhP6zk&export=view&authuser=0*/
-        await uploadThumbnailRobots(robot.slug, photo);
-    }
 
     async function addComp(formData) {
         "use server"
@@ -88,6 +63,17 @@ export default async function Page({ params }) {
         await revalidatePath(`/admin/robots/${robot.slug}`)
     }
 
+    async function deleteRobot(formData) {
+        "use server"
+        if (formData.get("slug") === robot.slug) {
+            console.log("deleting robot",robot.slug);
+            removeRobot(robot.slug);
+            revalidatePath("/robots");
+            revalidatePath("/admin/robots");
+            redirect("/admin/robots");
+        }
+    }
+
     async function fetchCompData(eventKey) {
         "use server"
         try {
@@ -138,6 +124,9 @@ export default async function Page({ params }) {
                                       ', ' + date.getFullYear();
                 return formattedDate;
             }
+
+            if (!statusdata?.qual) return null;
+            
             const data = {
                 name: eventdata.name,
                 dates: `${convertDate(eventdata.start_date)} to ${convertDate(eventdata.end_date)}`,
@@ -160,6 +149,6 @@ export default async function Page({ params }) {
     }
     
     return (
-        <Robot robot={robot} editRobot={editRobot} changeThumbnail={changeThumbnail} addComp={addComp} deleteComp={deleteComp} addResource={addResource} deleteResource={deleteResource} compData={compData} setPublishedRobot={setPublishedRobot} reloadCompetitions={reloadCompetitions} />
+        <Robot robot={robot} editRobot={editRobot} addComp={addComp} deleteComp={deleteComp} addResource={addResource} deleteResource={deleteResource} compData={compData} setPublishedRobot={setPublishedRobot} reloadCompetitions={reloadCompetitions} deleteRobot={deleteRobot} slug={slug} />
     )
 }

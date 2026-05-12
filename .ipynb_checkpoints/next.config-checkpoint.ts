@@ -8,6 +8,8 @@ module.exports = {
     remotePatterns: [
         new URL('https://lh3.googleusercontent.com/a/**'), 
         new URL('https://placehold.co/**'), 
+        new URL('https://cdn.wchen.dev/**'),
+        new URL('https://92iqff2obfplzq04.public.blob.vercel-storage.com/**'),
         {
             protocol: 'https',
             hostname: 'drive.usercontent.google.com',

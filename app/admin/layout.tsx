@@ -12,9 +12,11 @@ export default async function Layout({
     if (session?.user?.role !== "admin") return notFound()
 
     return (
+        <div className="w-full">
         <SessionProvider>
             <Navbar2 />
             {children}
         </SessionProvider>
+        </div>
     )
 }
