@@ -257,8 +257,7 @@ export default function Robot({ robot, editRobot, addComp, deleteComp, reloadCom
                         <div className="flex flex-col w-full justify-center text-center space-y-7">
                             {Object.entries(robot.resources || {}).map(([key, value]) => (
                                 <div key={value} className="grid grid-cols-4 space-x-5 justify-between text-left rounded-2xl w-full p-5 bg-gray-200">
-                                    <span className="text-3xl font-medium col-span-1">{key}</span>
-                                    <span className="text-3xl font-medium col-span-2">{value}</span>
+                                    <Link href={value} className="text-3xl font-medium text-blue-500 underline col-span-3">{key}</Link>
                                     <form action={deleteResource} className="col-span-1 flex justify-end">
                                         <input type="hidden" name="url" value={value} />
                                         <input type="hidden" name="text" value={key} />

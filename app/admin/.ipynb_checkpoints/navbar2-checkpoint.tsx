@@ -29,8 +29,8 @@ export default function Navbar2() {
               className={clsx(
                 "transition hover:border-blue-500 border-4 px-2 py-1.5",
                 {
-                  "border-blue-500": pathname === link.href,
-                  "border-transparent": pathname !== link.href,
+                  "border-blue-500": pathname.includes(link.href),
+                  "border-transparent": !pathname.includes(link.href),
                 }
               )}
             >
