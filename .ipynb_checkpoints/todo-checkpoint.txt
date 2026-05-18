@@ -1,0 +1,14 @@
+footer: flex-row justify-between
+
+move more info from homepage to about us, split about us to first and team 1160
+
+move from focusing around first to more about robotics and community
+
+crop mentor photos for just a headshot, or just wait for new photos?
+
+add description to side of each robots photo.
+also add button to the bottom of that description
+
+get rid of login button totally, keep logout button though
+
+figma ux/ui then translate to website (ts not happening vro)
