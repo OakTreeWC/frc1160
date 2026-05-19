@@ -1,6 +1,8 @@
 import UploadS3 from './uploads3';
 import { revalidatePath } from 'next/cache';
 
+// remember when you create a new s3key if has to be created in the sql 'photos' table manually as well. (i dont remember why i did this but i think it was just for security reasons or smth idk)
+
 const uploadDialogs = [
     {
         text: "Homepage | Background",
@@ -11,6 +13,11 @@ const uploadDialogs = [
         text: "Homepage | About Us",
         s3key: "homepage/yippee",
         path: "/"
+    },
+    {
+        text: "About Us | Background",
+        s3key: "aboutus/bg",
+        path: "/aboutus"
     },
     {
         text: "About Us | Team",

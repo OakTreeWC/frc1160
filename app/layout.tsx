@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Source_Sans_3 } from "next/font/google";
+import { Source_Sans_3, League_Spartan } from "next/font/google";
 // @ts-ignore: CSS module declaration is handled by Next.js
 import "./globals.css";
 import NavBar from '@/app/ui/navbar';
@@ -11,6 +11,10 @@ import { SessionProvider } from "next-auth/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const sourceSans3 = Source_Sans_3({
+  subsets: ["latin"],
+});
+
+export const leagueSpartan = League_Spartan({
   subsets: ["latin"],
 });
 

@@ -3,9 +3,14 @@ import Link from 'next/link';
 import { getPublicPhoto } from '@/app/lib/data';
 
 export default async function Page() {
+    const aboutus_bg = await getPublicPhoto('aboutus/bg') || "/team/parade.jpg";
+    const aboutus_team = await getPublicPhoto('aboutus/team') || "/team/parade.jpg";
   return (
     <main className="text-center md:text-left">
-        <div id="cards" className="relative text-black w-full flex flex-1 flex-col opacity-85 bg-white">  
+        <div className="z-0 w-full h-[50vh] block relative" >
+            <Image src={aboutus_bg} height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-cover w-full mt-0 top-0 h-full overflow-hidden bg-center md:fixed filter brightness-65 block absolute" />
+        </div>
+        <div id="cards" className="relative text-black w-full flex flex-1 flex-col bg-white/85">  
             <div className="pb-19 md:py-19 px-10 md:px-45 w-full">
                 <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 justify-center flex-wrap">
                     <div className="flex flex-col md:basis-1/5 items-center justify-center text-center space-y-3 font-light text-xl pt-10 md:pt-0">
@@ -50,7 +55,7 @@ export default async function Page() {
                         </span>
                     </div>
                     <div className="flex flex-col md:basis-1/4 items-center space-y-3">
-                        <Image src={await getPublicPhoto('aboutus/team') || "/team/parade.jpg"} width={800} height={600} alt="Team Picture" />
+                        <Image src={aboutus_team} width={800} height={600} alt="Team Picture" />
                     </div>
                 </div>
             </div>

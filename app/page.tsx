@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getSponsors, getRealSponsors, getPublicPhoto } from '@/app/lib/data';
 import { head, list } from "@vercel/blob";
 import { blob } from "stream/consumers";
+import { leagueSpartan } from "./layout";
 
 export default async function Page() {
   let sponsors = await getSponsors();
@@ -13,53 +14,21 @@ export default async function Page() {
   return (
     <main className="text-center md:text-left flex flex-col">
         
-        <div className="z-0 w-full md:h-screen block" >
-            <Image src={herophoto} height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-scale-down md:object-cover w-full mt-0 top-0 md:h-full overflow-hidden bg-center md:fixed filter brightness-80 block" />
-        </div>
-        <div id="cards" className="pt-10 md:pt-0 relative top-0 md:top-full text-black w-full flex flex-col opacity-100 bg-white/85">
-            <div className="md:py-20 px-10 md:px-[10vw] w-full">
-                <div className="flex flex-col space-y-3 md:flex-row md:space-y-8 flex-wrap justify-center items-start">
-                    <div className="flex flex-col md:basis-1/2 items-center space-y-5 pr-5">
-                        <Image src="/homepage/FIRST.svg" width={150} height={150} alt="FIRST Logo" />
-                        <span className="text-6xl font-light flex flex-col space-y-1">
-                            <span>
-                                Team 1160 is a FIRST® FRC Team
-                            </span>
-                            
-                            <span className="text-3xl font-normal">
-                                What is FIRST® and what do they do?
-                            </span>
-                        </span>
-                        <span className="text-xl font-light">
-                            <b>FIRST stands for For Inspiration and Recognition of Science and Technology.</b> Accomplished inventor Dean Kamen founded FIRST® in 1989 to inspire appreciation of science and technology in young people. FIRST® inspires people young and old to learn through robotics.
-                            <br />
-                            <span className="relative top-1">
-                                <b>FRC</b>, the league that Titanium Robotics competes in, is the High School level robotics league and stands for <b>FIRST Robotics Competition</b>
-                            </span>
-                            <br />
-                            <span className="relative top-3">
-                                Learn more about FIRST®, at&nbsp;
-                                <Link href="https://www.firstinspires.org/about" className="text-blue-500 underline font-medium" >
-                                    www.firstinspires.org/about
-                                </Link>
-                            </span>
-                            
-                        </span>
-                    </div>
-                    <div className="flex flex-col md:basis-1/2 items-center space-y-5 py-20 md:pt-0">
-                        <Image src="/homepage/location-dot-solid.svg" width={100} height={110} alt="Location Pin" />
-                        <span className="text-6xl font-light">
-                            Team 1160 is located in San Marino, CA.
-                        </span>
-                        <span className="text-xl font-light">
-                            Our team is located in San Marino, California and is a part of San Marino High School. We work with teachers and students along with professionals around the area to provide a high quality STEM (and FIRST®) experience.
-                        </span>
-                    </div>
+        <div className="z-0 w-full h-[50vh] md:h-screen block relative" >
+            <Image src={herophoto} height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-cover w-full mt-0 top-0 h-full overflow-hidden bg-center md:fixed filter brightness-65 block absolute" />
+            <div className="z-10 absolute text-white font-light flex flex-col items-center justify-center h-full w-full p-5 bottom-0 md:bottom-15 md:px-25 text-center">
+                <h1 className={`${leagueSpartan.className} text-5xl md:text-8xl font-normal`}>Titanium Robotics</h1>
+                <h2 className="text-4xl md:text-6xl italic font-light">Feelings are important, but <br className="hidden lg:block"/>it's the Physics that matters.</h2>
+                <div className="flex justify-center mt-7 opacity-100">
+                    <Link href="/aboutus" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-3xl text-blue-500 hover:border-blue-400 hover:text-blue-400 bg-white/85 hover:bg-white/95">About Us</Link>
                 </div>
             </div>
-            <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
-            <div className="py-20 px-10 md:px-[10vw] w-full">
-                <div className="flex flex-col w-full md:w-auto md:flex-row flex-wrap">
+        </div>
+        <div id="cards" className="pt-10 md:pt-15 relative top-0 md:top-full text-black w-full flex flex-col space-y-15 pb-15 opacity-100 bg-white/85">
+            <div className="px-10 md:px-[10vw] w-full flex flex-col">
+                <span className="items-center text-6xl font-light pb-6 text-center">Who We Are</span>
+                <div className="flex flex-col w-full md:w-auto md:flex-row">
+                    
                     <span className="md:basis-1/2 items-center">
                         <Image src={yippee} width={1000} height={665} alt="yippe" />
                     </span>
@@ -76,9 +45,39 @@ export default async function Page() {
                 </div>
             </div>
             <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
-            <div className="py-20 px-10 md:px-[10vw] w-full">
+            <div className="px-10 md:px-[10vw] w-full flex flex-col md:flex-row gap-10 md:gap-15 justify-center items-center">
+                <Image src="/homepage/FIRST.svg" width={150} height={150} alt="FIRST Logo" />
+                <div className="flex flex-col items-center space-y-5 pr-5 md:basis-3/4">
+                    <span className="text-6xl font-light flex w-full flex-col space-y-1">
+                        <span>
+                            Team 1160 is a FIRST® FRC Team
+                        </span>
+                        
+                        <span className="text-3xl font-normal">
+                            What is FIRST® and what do they do?
+                        </span>
+                    </span>
+                    <span className="text-xl font-light">
+                        <b>FIRST stands for For Inspiration and Recognition of Science and Technology.</b> Accomplished inventor Dean Kamen founded FIRST® in 1989 to inspire appreciation of science and technology in young people. FIRST® inspires people young and old to learn through robotics.
+                        <br />
+                        <span className="relative top-1">
+                            <b>FRC</b>, the league that Titanium Robotics competes in, is the High School level robotics league and stands for <b>FIRST Robotics Competition</b>.
+                        </span>
+                        <br />
+                        <span className="relative top-3">
+                            Learn more about FIRST®, at&nbsp;
+                            <Link href="https://www.firstinspires.org/about" className="text-blue-500 underline font-medium" >
+                                www.firstinspires.org/about
+                            </Link>
+                        </span>
+                        
+                    </span>
+                </div>
+            </div>
+            <hr className="border-2 border-gray-400 mx-25 rounded-xl" />
+            <div className="px-10 md:px-[10vw] w-full">
                 <div className="flex flex-col items-center">
-                    <span className="items-center text-5xl font-light pb-6 text-center">Titanium Sponsors</span>
+                    <span className="items-center text-6xl font-light pb-6 text-center">Titanium Sponsors</span>
                     <div className="items-center font-light items-stretch">
                         <div className="flex flex-col md:flex-row flex-wrap pt-8 md:p-8 md:space-x-8 space-y-8 justify-center items-center">
                             {
@@ -98,7 +97,7 @@ export default async function Page() {
                                 })
                             }
                         </div>
-                        <div className="text-2xl font-normal flex flex-col space-y-5 pt-10 text-center">
+                        <div className="text-2xl font-normal flex flex-col pt-10 space-y-5 text-center">
                             {
                                 sponsors.map((sponsor) => {
                                     return (<span key={sponsor.name}>{sponsor.name}</span>);
