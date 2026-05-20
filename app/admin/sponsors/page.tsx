@@ -1,5 +1,5 @@
 import { auth } from '@/auth';
-import { addSponsors, getSponsors, removeSponsor, deleteSponsorFR, createSponsorFR, getRealSponsors } from '@/app/lib/data';
+import { getSponsors, removeSponsor, deleteSponsorFR, createSponsorFR, getRealSponsors, addSponsor } from '@/app/lib/data';
 import { revalidatePath } from 'next/cache';
 import Image from 'next/image';
 
@@ -16,13 +16,15 @@ export default async function Page() {
     }
 
     const sponsor = formData.get('sponsor') as string;
+    const amount = Math.round(parseFloat(formData.get('amount') as string));
 
-    if (!sponsor) return;
+    if (!sponsor || isNaN(amount)) return;
 
-    await addSponsors([sponsor]);
+    await addSponsor(sponsor, amount);
 
     revalidatePath('/admin/sponsors');
     revalidatePath('/');
+    revalidatePath('/sponsors');
   }
 
   async function deleteSponsor(formData: FormData) {
@@ -41,6 +43,7 @@ export default async function Page() {
 
     revalidatePath('/admin/sponsors');
     revalidatePath('/');
+    revalidatePath('/sponsors');
   }
 
   async function createRealSponsor(formData: FormData) {
@@ -64,6 +67,7 @@ export default async function Page() {
 
     revalidatePath('/admin/sponsors');
     revalidatePath('/');
+    revalidatePath('/sponsors');
   }
 
   async function deleteRealSponsor(formData: FormData) {
@@ -82,6 +86,7 @@ export default async function Page() {
 
     revalidatePath('/admin/sponsors');
     revalidatePath('/');
+    revalidatePath('/sponsors');
   }
 
   return (
@@ -114,6 +119,13 @@ export default async function Page() {
                 required
                 autoFocus
               />
+              <input
+                placeholder="Amount"
+                name="amount"
+                type="number"
+                className="border-2 border-white p-2 rounded-lg"
+                required
+              />
               <button
                 type="submit"
                 className="border-2 border-white rounded-lg px-4 py-2 bg-gray-200 hover:cursor-pointer"
@@ -126,18 +138,21 @@ export default async function Page() {
 
         {/* Sponsors List */}
         <div className="pb-10 px-6 md:px-20 flex justify-center">
-          <div className="bg-gray-300 p-6 rounded-lg w-full max-w-md space-y-3">
+          <div className="bg-gray-300 p-6 rounded-lg w-full max-w-lg space-y-3">
             {sponsors.length === 0 ? (
               <p className="text-center">No sponsors yet</p>
             ) : (
               sponsors.map((sponsor: any) => (
                 <div
-                  key={sponsor.name}
+                  key={sponsor.id}
                   className="flex justify-between items-center bg-white p-2 rounded"
                 >
                   <span>{sponsor.name}</span>
+                  {sponsor.amount !== null && (
+                    <span>${sponsor.amount}</span>
+                  )}
                   <form action={deleteSponsor} className="h-8 w-8">
-                    <input type="hidden" name="sponsor" value={sponsor.name} />
+                    <input type="hidden" name="sponsor" value={sponsor.id} />
                     <button type="submit">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

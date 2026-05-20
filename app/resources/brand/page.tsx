@@ -8,9 +8,9 @@ export default function Page() {
             <div className="py-19 px-10 md:px-45 w-full">
                 <div className="flex flex-row justify-center flex-wrap">
                     <div className="flex flex-col items-center w-200 space-y-5">
-                        <span className="text-6xl font-light flex flex-col space-y-1">
+                        <h1 className="text-6xl font-light flex flex-col space-y-1">
                             Our Brand
-                        </span>
+                        </h1>
                         <span className="text-xl font-light px-8">
                             lil description of our brand, biz job
                         </span>

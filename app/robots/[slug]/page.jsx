@@ -88,8 +88,8 @@ export default async function Page({ params }) {
                 <div className="flex flex-row justify-center flex-wrap">
                     <div className="flex flex-col items-center space-y-10 px-8 text-center">
                         <div>
-                            <span className="text-6xl font-light text-center flex flex-col space-y-1">{robot.name}</span>
-                            <span className="text-4xl font-normal">{robot.seasonname || ""}</span>
+                            <h1 className="text-6xl font-light text-center flex flex-col space-y-1">{robot.name}</h1>
+                            <h2 className="text-4xl font-normal">{robot.seasonname || ""}</h2>
                         </div>
                         <span className="flex flex-row space-x-5 items-center justify-center">
                             <Image src={robot.photos.thumbnail} width={800} height={600} alt={robot.name} />
