@@ -55,7 +55,7 @@ export async function editPublicPhoto(key: string, value: string) {
 
 export async function getSponsors() {
   try {
-    const data = await sql`SELECT * FROM sponsors`;
+    const data = await sql`SELECT id, amount, name FROM sponsors ORDER BY amount DESC`;
     return data;
   } catch (error) {
     console.error('Database Error:', error);
@@ -63,11 +63,9 @@ export async function getSponsors() {
   }
 }
 
-export async function addSponsors(sponsors: any[]) {
+export async function addSponsor(sponsor: string, amount: number) {
   try {
-      for (const sponsor of sponsors) {
-        await sql`INSERT INTO sponsors VALUES (${sponsor})`;
-      }
+      await sql`INSERT INTO sponsors (name, amount) VALUES (${sponsor}, ${amount})`;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to add sponsor.');
@@ -79,7 +77,7 @@ export async function removeSponsor(sponsor: string) {
       await sql`DELETE FROM sponsors WHERE ctid IN (
         SELECT ctid
         FROM sponsors
-        WHERE name = ${sponsor}
+        WHERE id = ${sponsor}
         LIMIT 1
       )`;
   } catch (error) {

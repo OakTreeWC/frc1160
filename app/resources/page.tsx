@@ -10,9 +10,9 @@ export default async function Page() {
             <div className="py-19 px-10 md:px-45 w-full">
                     <div className="flex flex-row justify-center flex-wrap">
                         <div className="flex flex-col items-center space-y-5 px-8 text-center">
-                            <span className="text-6xl font-light flex flex-col space-y-2">
+                            <h1 className="text-6xl font-light flex flex-col space-y-2">
                                 Resources
-                            </span>
+                            </h1>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,6 @@ export default function NavBar() {
       {"name":"Cabinet","href":"/cabinet/engineering", "alt":"/cabinet/business"},
       {"name":"Robots","href":"/robots"},
       {"name":"Donate","href":"/donate"},
-      {"name":"Resources","href":"/resources"},
   ]
   return (
     <main className = {`flex flex-row space-x-0 justify-left items-center p-0 h-25 relative inset-0 z-50 bg-white md:bg-white/85 w-full`}>

@@ -4,6 +4,7 @@ import { getSponsors, getRealSponsors, getPublicPhoto } from '@/app/lib/data';
 import { head, list } from "@vercel/blob";
 import { blob } from "stream/consumers";
 import { leagueSpartan } from "./layout";
+import { strasua } from "@/app/lib/strasua";
 
 export default async function Page() {
   let sponsors = await getSponsors();
@@ -17,7 +18,7 @@ export default async function Page() {
         <div className="z-0 w-full h-[50vh] md:h-screen block relative" >
             <Image src={herophoto} height={"1330"} width={"2000"} loading="eager" alt="hero photo" className="object-cover w-full mt-0 top-0 h-full overflow-hidden bg-center md:fixed filter brightness-65 block absolute" />
             <div className="z-10 absolute text-white font-light flex flex-col items-center justify-center h-full w-full p-5 bottom-0 md:bottom-15 md:px-25 text-center">
-                <h1 className={`${leagueSpartan.className} text-5xl md:text-8xl font-normal`}>Titanium Robotics</h1>
+                <h1 className={`${strasua.className} text-5xl md:text-8xl font-normal`}>Titanium Robotics</h1>
                 <h2 className="text-4xl md:text-6xl italic font-light">Feelings are important, but <br className="hidden lg:block"/>it's the Physics that matters.</h2>
                 <div className="flex justify-center mt-7 opacity-100">
                     <Link href="/aboutus" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-3xl text-blue-500 hover:border-blue-400 hover:text-blue-400 bg-white/85 hover:bg-white/95">About Us</Link>
