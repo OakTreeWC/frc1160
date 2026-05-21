@@ -28,6 +28,7 @@ export default async function Page() {
                             <span className="font-medium">SCHOOL AFFILIATION</span>
                             <Link href="https://www.sanmarinohs.org" className="text-blue-500 underline">San Marino High School</Link>
                         </div>
+                        <Link href="/contactus" className="mt-5 p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-3xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Contact Us</Link>
                     </div>
                     <div className="flex flex-col md:basis-4/5 items-center space-y-5">
                         <h1 className="text-6xl font-light flex flex-col space-y-1">

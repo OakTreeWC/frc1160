@@ -27,7 +27,7 @@ export default async function Page() {
                                 <span className="text-xl font-light px-8">
                                     how
                                 </span>
-                                <div className="flex flex-row space-x-5 pt-3 justify-center opacity-100">
+                                <div className="flex flex-row flex-wrap gap-5 pt-3 justify-center opacity-100">
                                     <Link href="/resources/sponsorpacket.pdf" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Sponsorship Packet</Link>
                                     <Link href="/sponsors" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Current Sponsors</Link>
                                     <Link href="mailto:titaniumrobotics@gmail.com?subject=Donating To Titanium" className="p-3 border-5 border-blue-500 transition-colors ease-in-out duration-300 font-bold text-2xl text-blue-500 hover:border-blue-400 hover:text-blue-400">Email Us</Link>
